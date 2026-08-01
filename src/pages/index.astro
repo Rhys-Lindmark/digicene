@@ -98,7 +98,9 @@ const initialUtterances = listUtterances(getDatabase(), undefined, 0, 30).map(
     min-width: 0;
     min-height: 0;
     background: #f1f0ea;
-    overflow: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
   }
 
   .agent-pane > astro-island {
@@ -109,19 +111,14 @@ const initialUtterances = listUtterances(getDatabase(), undefined, 0, 30).map(
 
   .chorus-shell {
     display: block;
-    height: 100%;
-    min-height: 0;
-    overflow: hidden;
+    min-height: 100%;
   }
   .chorus-shell > summary {
     display: none;
   }
   .chorus-inner {
     display: block;
-    height: 100%;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    scrollbar-gutter: stable;
+    min-height: 100%;
   }
 
   @media (min-width: 801px) {
@@ -279,6 +276,7 @@ const initialUtterances = listUtterances(getDatabase(), undefined, 0, 30).map(
       bottom: 0.7rem;
       height: auto;
       max-height: min(72dvh, 42rem);
+      overflow: hidden;
       border: 1px solid #d4d2c8;
       border-radius: 0.35rem;
       background: #f1f0ea;
@@ -323,6 +321,9 @@ const initialUtterances = listUtterances(getDatabase(), undefined, 0, 30).map(
     }
     .chorus-inner {
       max-height: calc(min(72dvh, 42rem) - 3.2rem);
+      min-height: 0;
+      overflow-y: auto;
+      overscroll-behavior: contain;
       border-top: 1px solid #d9d7cf;
     }
     .chorus-header {
