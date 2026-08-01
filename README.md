@@ -1,4 +1,8 @@
-# Astro Starter Kit: Minimal
+# Digicene
+
+The Digicene essay and its live, shared AI Chorus.
+
+See [CHORUS.md](./CHORUS.md) for architecture, local development, cost controls, and deployment instructions.
 
 ```sh
 npm create astro@latest -- --template minimal

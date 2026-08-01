@@ -17,6 +17,10 @@ pnpm-debug.log*
 .env
 .env.production
 
+# local Chorus persistence
+data/*.db
+data/*.db-*
+
 # macOS-specific files
 .DS_Store
 

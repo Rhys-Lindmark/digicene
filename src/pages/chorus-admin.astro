@@ -1,0 +1,124 @@
+---
+export const prerender = false;
+---
+
+<html lang="en">
+  <head
+    ><meta charset="utf-8" /><meta
+      name="viewport"
+      content="width=device-width"
+    /><title>Chorus diagnostics</title></head
+  >
+  <body>
+    <main>
+      <h1>Chorus diagnostics</h1>
+      <form id="access">
+        <label
+          >Admin token <input
+            id="token"
+            type="password"
+            autocomplete="current-password"
+            required
+          /></label
+        ><button>View</button>
+      </form>
+      <p id="message">
+        Protected values remain server-side until a valid token is supplied.
+      </p>
+      <pre id="diagnostics" hidden></pre>
+      <section id="moderation" hidden>
+        <h2>Hide an utterance</h2><form id="hide">
+          <input id="utterance-id" placeholder="Utterance ID" required /><button
+            >Hide</button
+          >
+        </form>
+      </section>
+    </main>
+    <script>
+      const access = document.querySelector<HTMLFormElement>("#access")!;
+      const token = document.querySelector<HTMLInputElement>("#token")!;
+      const output = document.querySelector<HTMLPreElement>("#diagnostics")!;
+      const message = document.querySelector<HTMLParagraphElement>("#message")!;
+      const moderation = document.querySelector<HTMLElement>("#moderation")!;
+      const utteranceId =
+        document.querySelector<HTMLInputElement>("#utterance-id")!;
+      access.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const response = await fetch("/api/admin/diagnostics", {
+          headers: { "x-admin-token": token.value },
+        });
+        if (!response.ok) {
+          message.textContent = "Access denied.";
+          return;
+        }
+        output.textContent = JSON.stringify(await response.json(), null, 2);
+        output.hidden = false;
+        moderation.hidden = false;
+        message.textContent = "";
+      });
+      document
+        .querySelector<HTMLFormElement>("#hide")!
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const id = utteranceId.value;
+          const response = await fetch("/api/admin/hide", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              "x-admin-token": token.value,
+            },
+            body: JSON.stringify({ id }),
+          });
+          message.textContent = response.ok
+            ? "Utterance hidden."
+            : "Could not hide that utterance.";
+        });
+    </script>
+  </body>
+</html>
+
+<style>
+  :global(body) {
+    margin: 0;
+    background: #f7f6f1;
+    color: #171714;
+    font-family: Georgia, serif;
+  }
+  main {
+    width: min(52rem, calc(100% - 2rem));
+    margin: 4rem auto;
+  }
+  h1,
+  h2 {
+    font-weight: 400;
+  }
+  form {
+    display: flex;
+    gap: 0.75rem;
+    align-items: end;
+    flex-wrap: wrap;
+  }
+  label {
+    display: grid;
+    gap: 0.4rem;
+  }
+  input,
+  button {
+    padding: 0.65rem 0.8rem;
+    border: 1px solid #aaa89f;
+    background: white;
+    font: inherit;
+  }
+  button {
+    cursor: pointer;
+  }
+  pre {
+    padding: 1rem;
+    overflow: auto;
+    background: #eceae2;
+    line-height: 1.5;
+  }
+  section {
+    margin-top: 2rem;
+  }
+</style>

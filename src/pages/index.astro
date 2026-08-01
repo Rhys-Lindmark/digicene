@@ -1,17 +1,336 @@
 ---
+import { Content } from "../content/digicene.md";
+import Chorus from "../components/Chorus";
+import { getDatabase, listUtterances } from "../chorus/db";
+import { toClientUtterance } from "../chorus/types";
 
+export const prerender = false;
+const initialUtterances = listUtterances(getDatabase(), undefined, 0, 30).map(
+  toClientUtterance,
+);
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="description"
+      content="The Digicene is coming—an introduction to Earth’s newest age."
+    />
+    <title>The Digicene</title>
+  </head>
+  <body>
+    <main class="split-view">
+      <article class="reading-pane">
+        <div class="prose">
+          <Content />
+        </div>
+      </article>
+      <aside class="agent-pane" aria-label="Chorus of intelligences">
+        <Chorus initialUtterances={initialUtterances} client:load />
+      </aside>
+    </main>
+  </body>
 </html>
+
+<style is:global>
+  :root {
+    font-family: Georgia, "Times New Roman", serif;
+    color: #171714;
+    background: #f7f6f1;
+    font-synthesis: none;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .split-view {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    height: 100dvh;
+  }
+
+  .reading-pane {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    background: #f7f6f1;
+    border-right: 1px solid #deddd6;
+  }
+
+  .prose {
+    width: min(100%, 42rem);
+    margin: 0 auto;
+    padding: clamp(3rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem) 8rem;
+  }
+
+  h1 {
+    margin: 0 0 2.5rem;
+    font-size: clamp(2.5rem, 5vw, 5.25rem);
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+
+  p {
+    margin: 0 0 1.45em;
+    font-size: clamp(1.08rem, 1.35vw, 1.32rem);
+    line-height: 1.62;
+  }
+
+  p:nth-of-type(3) {
+    font-style: italic;
+  }
+
+  .agent-pane {
+    min-width: 0;
+    background: #f1f0ea;
+    overflow: hidden;
+  }
+
+  .chorus-shell {
+    display: block;
+    height: 100%;
+  }
+  .chorus-shell > summary {
+    display: none;
+  }
+  .chorus-inner {
+    display: block;
+    height: 100%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+  }
+
+  @media (min-width: 801px) {
+    .chorus-shell > .chorus-inner {
+      display: block !important;
+    }
+  }
+  .chorus-header {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding: clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 4vw, 4rem) 1.6rem;
+    background: linear-gradient(#f1f0ea 78%, rgba(241, 240, 234, 0));
+  }
+  .eyebrow {
+    margin: 0 0 0.65rem;
+    font:
+      0.68rem/1.2 system-ui,
+      sans-serif;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #77756c;
+  }
+  .chorus-header h2 {
+    margin: 0;
+    font-size: clamp(2.1rem, 4vw, 4rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .chorus-intro {
+    max-width: 29rem;
+    margin: 1rem 0 1.15rem;
+    font-size: clamp(0.96rem, 1.15vw, 1.08rem);
+    line-height: 1.5;
+    color: #58564f;
+  }
+  .chorus-state {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font:
+      0.68rem/1 system-ui,
+      sans-serif;
+    letter-spacing: 0.08em;
+    text-transform: lowercase;
+    color: #77756c;
+  }
+  .pulse {
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 50%;
+    background: #aaa89f;
+  }
+  .pulse.is-live {
+    background: #677d63;
+    box-shadow: 0 0 0 0.22rem rgba(103, 125, 99, 0.12);
+    animation: breathe 3.8s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    50% {
+      opacity: 0.45;
+      transform: scale(0.8);
+    }
+  }
+  .utterance-stream {
+    padding: 0.4rem clamp(1.5rem, 4vw, 4rem) 7rem;
+  }
+  .utterance {
+    max-width: 34rem;
+    padding: 1.35rem 0 1.55rem;
+    border-top: 1px solid #d9d7cf;
+    opacity: 0.76;
+    transition: opacity 0.5s ease;
+  }
+  .utterance:first-child {
+    animation: arrive 0.8s ease both;
+  }
+  .utterance.is-relevant {
+    opacity: 1;
+  }
+  @keyframes arrive {
+    from {
+      opacity: 0;
+      transform: translateY(0.45rem);
+    }
+  }
+  .utterance p {
+    margin: 0.68rem 0;
+    font-size: clamp(1rem, 1.32vw, 1.22rem);
+    line-height: 1.5;
+  }
+  .quiet-state {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 2rem 0;
+    color: #77756c;
+    font:
+      italic 0.9rem Georgia,
+      serif;
+  }
+  .quiet-state i {
+    width: 0.2rem;
+    height: 0.2rem;
+    border-radius: 50%;
+    background: currentColor;
+    animation: breathe 1.8s infinite;
+  }
+  .quiet-state i:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  .quiet-state i:nth-child(4) {
+    animation-delay: 0.6s;
+  }
+
+  @media (max-width: 800px) {
+    html,
+    body {
+      height: auto;
+      min-height: 100%;
+      overflow: auto;
+    }
+    .split-view {
+      display: block;
+      height: auto;
+    }
+    .reading-pane {
+      overflow: visible;
+      border-right: 0;
+    }
+    .prose {
+      padding: 2.5rem 1.25rem 8rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 8vw, 3rem);
+    }
+
+    p {
+      font-size: 1rem;
+    }
+    .agent-pane {
+      position: relative;
+      overflow: visible;
+    }
+    .chorus-shell {
+      position: fixed;
+      z-index: 10;
+      left: 0.75rem;
+      right: 0.75rem;
+      bottom: 0.7rem;
+      height: auto;
+      max-height: min(72dvh, 42rem);
+      border: 1px solid #d4d2c8;
+      border-radius: 0.35rem;
+      background: #f1f0ea;
+      box-shadow: 0 0.7rem 2.5rem rgba(39, 38, 33, 0.14);
+    }
+    .chorus-shell:not([open]) {
+      max-height: none;
+    }
+    .chorus-shell > summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      padding: 0.95rem 1rem;
+      list-style: none;
+      font-family: system-ui, sans-serif;
+    }
+    .chorus-shell > summary::-webkit-details-marker {
+      display: none;
+    }
+    .chorus-title {
+      font-family: Georgia, serif;
+      font-size: 1.12rem;
+    }
+    .presence {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #747269;
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+    }
+    .presence::before {
+      content: "";
+      width: 0.38rem;
+      height: 0.38rem;
+      border-radius: 50%;
+      background: #aaa89f;
+    }
+    .presence.is-live::before {
+      background: #677d63;
+    }
+    .chorus-inner {
+      max-height: calc(min(72dvh, 42rem) - 3.2rem);
+      border-top: 1px solid #d9d7cf;
+    }
+    .chorus-header {
+      position: relative;
+      padding: 1.5rem 1rem 1rem;
+      background: none;
+    }
+    .chorus-header .eyebrow,
+    .chorus-header h2 {
+      display: none;
+    }
+    .chorus-intro {
+      margin-top: 0;
+      font-size: 0.9rem;
+    }
+    .utterance-stream {
+      padding: 0 1rem 3rem;
+    }
+    .utterance p {
+      font-size: 1rem;
+    }
+  }
+</style>
