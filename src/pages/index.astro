@@ -1,5 +1,41 @@
 ---
 export const prerender = false;
+
+const evidence = [
+  {
+    number: "01",
+    statement: "CO2 levels have increased from 275 to 425 ppm.",
+    source: "Our World in Data",
+    href: "https://ourworldindata.org/grapher/co2-long-term-concentration?time=0..latest",
+    image: "/co2-concentration.png",
+    alt: "Line chart showing atmospheric carbon dioxide concentration rising from about 275 ppm to more than 425 ppm.",
+  },
+  {
+    number: "02",
+    statement: "Half of the world’s arable land is now used for agriculture.",
+    source: "Our World in Data",
+    href: "https://ourworldindata.org/cdn-cgi/imagedelivery/qLq-8BTgXU8yG0N6HnOy8g/6d347dd7-ca5b-4aaa-374e-ce2e16044b00/w=850",
+    image: "/land-use-for-food.jpg",
+    alt: "Diagram showing how the world’s surface and habitable land are used for food production.",
+  },
+  {
+    number: "03",
+    statement: "Anthropogenic mass is now greater than all biomass.",
+    source: "Nature",
+    href: "https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-020-3010-5/MediaObjects/41586_2020_3010_Fig1_HTML.png",
+    image: "/anthropogenic-mass.png",
+    alt: "Area chart showing anthropogenic mass overtaking the dry weight of all biomass around 2020.",
+  },
+  {
+    number: "04",
+    statement:
+      "Human energy use has grown from 1 to 20 TW, compared to 100 TW for the biosphere.",
+    source: "Our World in Data",
+    href: "https://ourworldindata.org/grapher/global-primary-energy-by-source",
+    image: "/global-primary-energy.png",
+    alt: "Stacked area chart showing global primary energy use by source rising sharply since 1800.",
+  },
+];
 ---
 
 <!doctype html>
@@ -17,25 +53,65 @@ export const prerender = false;
     <title>The Digicene</title>
   </head>
   <body>
-    <main class="hero">
-      <video
-        class="hero-video"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="auto"
-        aria-hidden="true"
-      >
-        <source src="/digicene-background.mp4" type="video/mp4" />
-      </video>
+    <main>
+      <section class="hero">
+        <video
+          class="hero-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+          aria-hidden="true"
+        >
+          <source src="/digicene-background.mp4" type="video/mp4" />
+        </video>
 
-      <div class="hero-shade" aria-hidden="true"></div>
+        <div class="hero-shade" aria-hidden="true"></div>
 
-      <h1 class="title" aria-label="The Digicene">
-        <span class="title-the">The</span>
-        <span class="title-name">Digicene</span>
-      </h1>
+        <h1 class="title" aria-label="The Digicene">
+          <span class="title-the">The</span>
+          <span class="title-name">Digicene</span>
+        </h1>
+      </section>
+
+      <section class="epoch" aria-labelledby="epoch-heading">
+        <div class="epoch-intro">
+          <p class="eyebrow">A new geological epoch</p>
+          <h2 id="epoch-heading">
+            The Digicene is the next geological epoch, when computers become the
+            main driver of planetary change.
+          </h2>
+          <p class="epoch-transition">
+            It follows our current epoch, the Anthropocene, which began in 1850.
+          </p>
+        </div>
+
+        <div class="evidence">
+          {
+            evidence.map((item) => (
+              <article class="evidence-row">
+                <div class="evidence-copy">
+                  <span class="evidence-number" aria-hidden="true">
+                    {item.number}
+                  </span>
+                  <p>{item.statement}</p>
+                  <a href={item.href} target="_blank" rel="noreferrer">
+                    Source: {item.source}
+                    <span aria-hidden="true"> ↗</span>
+                  </a>
+                </div>
+
+                <figure class="chart">
+                  <a href={item.href} target="_blank" rel="noreferrer">
+                    <img src={item.image} alt={item.alt} loading="lazy" />
+                  </a>
+                </figure>
+              </article>
+            ))
+          }
+        </div>
+      </section>
     </main>
   </body>
 </html>
@@ -57,7 +133,10 @@ export const prerender = false;
     width: 100%;
     min-height: 100%;
     margin: 0;
-    overflow: hidden;
+  }
+
+  body {
+    overflow-x: hidden;
   }
 
   .hero {
@@ -91,7 +170,11 @@ export const prerender = false;
     z-index: -1;
     background:
       linear-gradient(180deg, rgba(5, 7, 5, 0.28), rgba(5, 7, 5, 0.38)),
-      radial-gradient(circle at center, transparent 15%, rgba(4, 6, 4, 0.3) 100%);
+      radial-gradient(
+        circle at center,
+        transparent 15%,
+        rgba(4, 6, 4, 0.3) 100%
+      );
   }
 
   .title {
@@ -118,6 +201,143 @@ export const prerender = false;
     letter-spacing: 0.2em;
   }
 
+  .epoch {
+    --ink: #171a16;
+    --paper: #eeece4;
+    padding: clamp(5rem, 10vw, 10rem) clamp(1.25rem, 5vw, 5.5rem)
+      clamp(5rem, 9vw, 9rem);
+    color: var(--ink);
+    background: var(--paper);
+  }
+
+  .epoch-intro,
+  .evidence {
+    width: min(100%, 90rem);
+    margin-inline: auto;
+  }
+
+  .epoch-intro {
+    padding-bottom: clamp(5rem, 10vw, 10rem);
+  }
+
+  .eyebrow,
+  .evidence-number,
+  .evidence-copy a {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow {
+    margin: 0 0 clamp(2rem, 5vw, 4.75rem);
+  }
+
+  .epoch h2 {
+    max-width: 18ch;
+    margin: 0;
+    font-size: clamp(2.45rem, 5.8vw, 6.2rem);
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+
+  .epoch-transition {
+    max-width: 31ch;
+    margin: clamp(2.5rem, 5vw, 5rem) 0 0 auto;
+    font-size: clamp(1.25rem, 2.2vw, 2rem);
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+  }
+
+  .evidence {
+    border-top: 1px solid rgba(23, 26, 22, 0.35);
+  }
+
+  .evidence-row {
+    display: grid;
+    grid-template-columns: minmax(15rem, 0.72fr) minmax(0, 1.28fr);
+    gap: clamp(2rem, 6vw, 7rem);
+    align-items: start;
+    padding: clamp(3rem, 7vw, 7rem) 0;
+    border-bottom: 1px solid rgba(23, 26, 22, 0.35);
+  }
+
+  .evidence-copy {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+
+  .evidence-number {
+    display: block;
+    margin-bottom: clamp(2rem, 5vw, 5rem);
+    color: rgba(23, 26, 22, 0.55);
+  }
+
+  .evidence-copy p {
+    margin: 0 0 2.5rem;
+    font-size: clamp(1.8rem, 3.2vw, 3.75rem);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+  }
+
+  .evidence-copy a {
+    width: fit-content;
+    margin-top: auto;
+    padding-bottom: 0.2rem;
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+
+  .evidence-copy a:hover,
+  .evidence-copy a:focus-visible {
+    opacity: 0.55;
+  }
+
+  .chart {
+    margin: 0;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid rgba(23, 26, 22, 0.18);
+    box-shadow: 0 1.5rem 4rem rgba(23, 26, 22, 0.08);
+  }
+
+  .chart a {
+    display: block;
+  }
+
+  .chart img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 800px) {
+    .epoch-transition {
+      margin-left: 0;
+    }
+
+    .evidence-row {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .evidence-copy {
+      min-height: 0;
+    }
+
+    .evidence-number {
+      margin-bottom: 1.5rem;
+    }
+
+    .evidence-copy p {
+      max-width: 22ch;
+      margin-bottom: 1.75rem;
+    }
+  }
+
   @media (max-width: 540px) {
     .title {
       flex-direction: column;
@@ -131,6 +351,10 @@ export const prerender = false;
     .title-name {
       font-size: clamp(2.4rem, 13vw, 4.4rem);
       letter-spacing: 0.12em;
+    }
+
+    .epoch {
+      padding-inline: 1rem;
     }
   }
 
