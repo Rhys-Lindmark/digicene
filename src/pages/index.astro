@@ -84,6 +84,7 @@ const evidence = [
       <section class="token-ticker" aria-label="OpenRouter token throughput">
         <div class="token-ticker-inner" data-token-ticker>
           <p class="token-label">Live(ish) cognitive throughput:</p>
+          <br class="token-line-break" aria-hidden="true" />
           <p
             class="token-total"
             aria-label="Estimated OpenRouter tokens processed per second"
@@ -428,13 +429,13 @@ const evidence = [
   }
 
   .token-ticker {
-    --ticker-ink: #fff;
+    --ticker-ink: #171a16;
     padding: clamp(2.5rem, 5vw, 5rem) clamp(1.25rem, 5vw, 5.5rem)
       clamp(3rem, 6vw, 6rem);
     color: var(--ticker-ink);
-    background: #111311;
-    border-top: 1px solid rgba(243, 241, 233, 0.18);
-    border-bottom: 1px solid rgba(243, 241, 233, 0.18);
+    background: #eeece4;
+    border-top: 1px solid rgba(23, 26, 22, 0.18);
+    border-bottom: 0;
   }
 
   .token-ticker-inner {
@@ -444,11 +445,17 @@ const evidence = [
   }
 
   .token-label {
-    margin: 0 0 0.8rem;
+    margin: 0;
     color: var(--ticker-ink);
     font-size: clamp(0.82rem, 1.4vw, 1.2rem);
     font-weight: 700;
     letter-spacing: 0.04em;
+  }
+
+  .token-line-break {
+    display: block;
+    content: "";
+    margin-top: 0.8rem;
   }
 
   .token-total {
@@ -467,7 +474,7 @@ const evidence = [
 
   .token-total a {
     color: var(--ticker-ink);
-    text-decoration-color: rgba(255, 255, 255, 0.55);
+    text-decoration-color: rgba(23, 26, 22, 0.45);
     text-underline-offset: 0.2em;
   }
 
