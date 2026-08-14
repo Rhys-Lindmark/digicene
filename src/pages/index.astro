@@ -130,6 +130,7 @@ const evidence = [
             </div>
             <div class="timeline-era timeline-era--digicene">
               <strong>Digicene</strong>
+              <span class="timeline-range">Future</span>
             </div>
           </div>
         </figure>
@@ -486,6 +487,9 @@ const evidence = [
   }
 
   .title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
     display: flex;
     align-items: baseline;
     margin: 0;
@@ -495,6 +499,7 @@ const evidence = [
     text-align: center;
     text-transform: uppercase;
     text-shadow: 0 2px 28px rgba(0, 0, 0, 0.45);
+    transform: translate(-50%, -50%);
   }
 
   .title-name {
@@ -598,15 +603,16 @@ const evidence = [
 
   .evidence {
     border-top: 1px solid rgba(23, 26, 22, 0.35);
+    box-shadow: 0 0 0 100vmax #f3d9b3;
+    clip-path: inset(0 -100vmax);
   }
 
   .evidence-row {
     display: grid;
-    grid-template-columns: minmax(15rem, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(15rem, 1fr) minmax(0, 2fr);
     gap: clamp(2rem, 6vw, 7rem);
     align-items: start;
     padding: clamp(3rem, 7vw, 7rem) 0;
-    border-bottom: 1px solid rgba(23, 26, 22, 0.35);
   }
 
   .evidence-copy {
@@ -646,18 +652,12 @@ const evidence = [
   }
 
   .digicene-signals {
-    --signal-ink: #f1eee5;
-    --signal-muted: rgba(241, 238, 229, 0.58);
+    --signal-ink: #171a16;
+    --signal-muted: rgba(23, 26, 22, 0.58);
     padding: clamp(6rem, 12vw, 12rem) clamp(1.25rem, 5vw, 5.5rem)
       clamp(5rem, 9vw, 9rem);
     color: var(--signal-ink);
-    background:
-      radial-gradient(
-        circle at 92% 4%,
-        rgba(93, 132, 99, 0.28),
-        transparent 28rem
-      ),
-      #121713;
+    background: #c9dcee;
   }
 
   .signals-intro,
@@ -680,16 +680,15 @@ const evidence = [
   }
 
   .signals-list {
-    border-top: 1px solid rgba(241, 238, 229, 0.24);
+    border-top: 1px solid rgba(23, 26, 22, 0.24);
   }
 
   .signal-row {
     display: grid;
-    grid-template-columns: minmax(15rem, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(15rem, 1fr) minmax(0, 2fr);
     gap: clamp(2rem, 6vw, 7rem);
     align-items: start;
     padding: clamp(3rem, 7vw, 7rem) 0;
-    border-bottom: 1px solid rgba(241, 238, 229, 0.24);
   }
 
   .signal-copy {
@@ -738,6 +737,8 @@ const evidence = [
   }
 
   .compute-chart {
+    --signal-ink: #f1eee5;
+    --signal-muted: rgba(241, 238, 229, 0.58);
     position: relative;
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(4rem, 0.45fr) minmax(0, 1fr);
@@ -746,7 +747,7 @@ const evidence = [
     min-height: 22rem;
     padding: clamp(1.5rem, 3vw, 2.75rem);
     justify-self: end;
-    color: inherit;
+    color: var(--signal-ink);
     text-decoration: none;
     background:
       linear-gradient(rgba(241, 238, 229, 0.075) 1px, transparent 1px),
