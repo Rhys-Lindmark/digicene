@@ -11,12 +11,18 @@ const evidence = [
   {
     statement: "Half of the world’s arable land is now used for agriculture.",
     image: "/land-use-for-food.jpg",
+    href: "https://ourworldindata.org/global-land-for-agriculture",
+    linkLabel:
+      "Explore Our World in Data’s research on global land use for agriculture",
     alt: "Diagram showing how the world’s surface and habitable land are used for food production.",
   },
   {
     label: "Mass",
     statement: "Anthropogenic mass is now greater than all biomass.",
     image: "/anthropogenic-mass.png",
+    href: "https://www.nature.com/articles/s41586-020-3010-5",
+    linkLabel:
+      "Read the Nature study on human-made mass exceeding global biomass",
     alt: "Area chart showing anthropogenic mass overtaking the dry weight of all biomass around 2020.",
     padded: true,
   },
@@ -85,22 +91,21 @@ const evidence = [
 
       <section class="token-ticker" aria-label="OpenRouter token throughput">
         <div class="token-ticker-inner" data-token-ticker>
-          <p class="token-label">Live cognitive throughput:</p>
           <p
             class="token-total"
             aria-label="Estimated OpenRouter tokens processed per second"
           >
-            <span data-token-total>—</span>
-            <span>tokens/second through</span>
-            <a
-              href="https://openrouter.ai/rankings"
-              target="_blank"
-              rel="noreferrer"
-            >
-              OpenRouter ↗
-            </a>
+            <strong>
+              Cognitive throughput of
+              <a
+                href="https://openrouter.ai/rankings"
+                target="_blank"
+                rel="noreferrer">OpenRouter</a
+              >:
+            </strong>
+            <span class="token-value" data-token-total>—</span>
+            <span class="token-unit">tok/s</span>
           </p>
-          <hr class="token-divider" />
         </div>
       </section>
 
@@ -110,9 +115,6 @@ const evidence = [
             The Digicene is the next geological epoch, when computers become the
             main driver of planetary change.
           </h2>
-          <p class="epoch-transition">
-            It follows our current epoch, the Holocene, which began in 1850.
-          </p>
         </div>
 
         <figure class="epoch-chart">
@@ -134,6 +136,9 @@ const evidence = [
               <span class="timeline-range">Future</span>
             </div>
           </div>
+          <p class="epoch-transition">
+            It follows our current epoch, the Holocene, which began in 1850:
+          </p>
         </figure>
 
         <div class="evidence">
@@ -154,6 +159,15 @@ const evidence = [
                       title={item.title}
                       loading="lazy"
                     />
+                  ) : item.href ? (
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={item.linkLabel}
+                    >
+                      <img src={item.image} alt={item.alt} loading="lazy" />
+                    </a>
                   ) : (
                     <img src={item.image} alt={item.alt} loading="lazy" />
                   )}
@@ -167,8 +181,7 @@ const evidence = [
       <section class="digicene-signals" aria-labelledby="signals-heading">
         <header class="signals-intro">
           <h2 id="signals-heading">
-            The Digicene numbers are smaller, but the curves are
-            exponential.
+            The Digicene numbers are smaller, but the curves are exponential.
           </h2>
         </header>
 
@@ -176,21 +189,20 @@ const evidence = [
           <article class="signal-row">
             <div class="signal-copy">
               <span class="signal-number">Energy</span>
-              <p>Data centers consume 50 GW—about 2% of all electricity.</p>
+              <p>Data centers consume 50 GW, about 2% of all electricity.</p>
             </div>
             <figure class="signal-chart">
               <iframe
                 src="https://ourworldindata.org/grapher/data-centers-share-electricity-demand?embedded=true"
                 title="Share of total electricity demand used by data centers"
-                loading="lazy"
-              />
+                loading="lazy"></iframe>
             </figure>
           </article>
 
           <article class="signal-row">
             <div class="signal-copy">
               <span class="signal-number">Mass</span>
-              <p>We now build more data centers than offices.</p>
+              <p>We build more data centers than offices.</p>
             </div>
             <figure class="signal-chart signal-chart--dark signal-chart--fixed">
               <a
@@ -211,7 +223,7 @@ const evidence = [
           <article class="signal-row">
             <div class="signal-copy">
               <span class="signal-number">Computation</span>
-              <p>There are now 25M H100e chips, 0.3% of human brainpower.</p>
+              <p>There are 25M H100e chips, 0.3% of human brainpower.</p>
             </div>
             <figure class="signal-chart">
               <a
@@ -234,11 +246,18 @@ const evidence = [
               <p>Claude codes 4% of public GitHub commits.</p>
             </div>
             <figure class="signal-chart signal-chart--dark">
-              <img
-                src="/claude-github-commits.jpg"
-                alt="Line chart showing Claude Code's daily GitHub commits growing from near zero to over 134,000 per day, roughly 4% of all public GitHub commits."
-                loading="lazy"
-              />
+              <a
+                href="https://newsletter.semianalysis.com/p/claude-code-is-the-inflection-point"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Read SemiAnalysis on Claude Code reaching 4% of public GitHub commits"
+              >
+                <img
+                  src="/claude-github-commits.jpg"
+                  alt="Line chart showing Claude Code's daily GitHub commits growing from near zero to over 134,000 per day, roughly 4% of all public GitHub commits."
+                  loading="lazy"
+                />
+              </a>
             </figure>
           </article>
         </div>
@@ -433,8 +452,7 @@ const evidence = [
 
   .token-ticker {
     --ticker-ink: #171a16;
-    padding: clamp(2.5rem, 5vw, 5rem) clamp(1.25rem, 5vw, 5.5rem)
-      clamp(3rem, 6vw, 6rem);
+    padding: clamp(1.4rem, 2.5vw, 2.25rem) clamp(1.25rem, 5vw, 5.5rem);
     color: var(--ticker-ink);
     background: #eeece4;
     border-top: 1px solid rgba(23, 26, 22, 0.18);
@@ -444,42 +462,30 @@ const evidence = [
   .token-ticker-inner {
     width: min(100%, 90rem);
     margin-inline: auto;
-    text-align: center;
-  }
-
-  .token-label {
-    margin: 0;
-    color: var(--ticker-ink);
-    font-size: clamp(0.82rem, 1.4vw, 1.2rem);
-    font-weight: 700;
-    letter-spacing: 0.04em;
-  }
-
-  .token-divider {
-    width: min(100%, 40rem);
-    margin: 0.9rem auto 0;
-    border: 0;
-    border-top: 1px solid rgba(23, 26, 22, 0.35);
+    text-align: left;
   }
 
   .token-total {
     display: flex;
-    gap: 0.45em;
+    gap: 0.3em;
     align-items: baseline;
-    justify-content: center;
-    margin: 0.8rem 0 0;
-    font-size: clamp(0.82rem, 1.4vw, 1.2rem);
+    justify-content: flex-start;
+    margin: 0;
+    font-size: clamp(1rem, 1.6vw, 1.4rem);
     font-variant-numeric: tabular-nums;
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: 0.04em;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
     flex-wrap: wrap;
   }
 
   .token-total a {
     color: var(--ticker-ink);
-    text-decoration-color: rgba(23, 26, 22, 0.45);
-    text-underline-offset: 0.2em;
+    text-decoration: none;
+  }
+
+  .token-value,
+  .token-unit {
+    color: rgba(23, 26, 22, 0.58);
   }
 
   .token-total a:hover,
@@ -669,8 +675,12 @@ const evidence = [
     box-shadow: 0 1.5rem 4rem rgba(23, 26, 22, 0.08);
   }
 
+  .chart a,
   .chart img {
     display: block;
+  }
+
+  .chart img {
     width: 100%;
     height: auto;
   }
@@ -745,7 +755,7 @@ const evidence = [
   }
 
   .signal-number {
-    margin-bottom: clamp(2rem, 5vw, 5rem);
+    margin-bottom: 0.75rem;
     color: var(--signal-muted);
     font-size: 0.72rem;
     font-weight: 700;
@@ -828,10 +838,6 @@ const evidence = [
       gap: 2.5rem;
     }
 
-    .signal-number {
-      margin-bottom: 1.5rem;
-    }
-
     .signal-copy p {
       max-width: 22ch;
     }
@@ -877,6 +883,5 @@ const evidence = [
     .digicene-signals {
       padding-inline: 1rem;
     }
-
   }
 </style>
