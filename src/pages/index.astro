@@ -148,7 +148,8 @@ const evidence = [
                 <figure class={`chart ${item.padded ? "chart--padded" : ""}`}>
                   {item.embed ? (
                     <iframe
-                      src={`https://ourworldindata.org/grapher/${item.embed}?embedded=true${item.embedParams ? `&${item.embedParams}` : ""}`}
+                      class="owid-embed"
+                      data-src={`https://ourworldindata.org/grapher/${item.embed}?embedded=true${item.embedParams ? `&${item.embedParams}` : ""}`}
                       title={item.title}
                       loading="lazy"
                     />
@@ -186,7 +187,8 @@ const evidence = [
             </div>
             <figure class="signal-chart">
               <iframe
-                src="https://ourworldindata.org/grapher/data-centers-share-electricity-demand?embedded=true"
+                class="owid-embed"
+                data-src="https://ourworldindata.org/grapher/data-centers-share-electricity-demand?embedded=true"
                 title="Share of total electricity demand used by data centers"
                 loading="lazy"></iframe>
             </figure>
@@ -258,6 +260,23 @@ const evidence = [
     </main>
 
     <script>
+      const owidObserver = new IntersectionObserver(
+        (entries, observer) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            const iframe = entry.target as HTMLIFrameElement;
+            const src = iframe.dataset.src;
+            if (src) iframe.src = src;
+            observer.unobserve(iframe);
+          }
+        },
+        { rootMargin: "200px" },
+      );
+
+      document
+        .querySelectorAll<HTMLIFrameElement>("iframe.owid-embed[data-src]")
+        .forEach((iframe) => owidObserver.observe(iframe));
+
       const heroVideos = Array.from(
         document.querySelectorAll<HTMLVideoElement>(".hero-video"),
       );
