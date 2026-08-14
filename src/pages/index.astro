@@ -5,6 +5,7 @@ const evidence = [
   {
     statement: "CO2 levels have increased from 275 to 425 ppm.",
     embed: "co2-long-term-concentration",
+    embedParams: "time=0..2025",
     title: "Carbon dioxide concentration in the atmosphere",
   },
   {
@@ -155,7 +156,7 @@ const evidence = [
                 <figure class="chart">
                   {item.embed ? (
                     <iframe
-                      src={`https://ourworldindata.org/grapher/${item.embed}?embedded=true`}
+                      src={`https://ourworldindata.org/grapher/${item.embed}?embedded=true${item.embedParams ? `&${item.embedParams}` : ""}`}
                       title={item.title}
                       loading="lazy"
                     />
