@@ -95,14 +95,7 @@ const evidence = [
             class="token-total"
             aria-label="Estimated OpenRouter tokens processed per second"
           >
-            <strong>
-              Cognitive throughput of
-              <a
-                href="https://openrouter.ai/rankings"
-                target="_blank"
-                rel="noreferrer">OpenRouter</a
-              >:
-            </strong>
+            <strong>Cognitive throughput:</strong>
             <span class="token-value" data-token-total>—</span>
             <span class="token-unit">tok/s</span>
           </p>
@@ -137,7 +130,7 @@ const evidence = [
             </div>
           </div>
           <p class="epoch-transition">
-            It follows our current epoch, the Holocene, which began in 1850:
+            It follows our current epoch, the Holocene, which began in 1850.
           </p>
         </figure>
 
@@ -478,19 +471,9 @@ const evidence = [
     flex-wrap: wrap;
   }
 
-  .token-total a {
-    color: var(--ticker-ink);
-    text-decoration: none;
-  }
-
   .token-value,
   .token-unit {
     color: rgba(23, 26, 22, 0.58);
-  }
-
-  .token-total a:hover,
-  .token-total a:focus-visible {
-    color: var(--ticker-ink);
   }
 
   .title {
@@ -554,7 +537,7 @@ const evidence = [
 
   .epoch-transition {
     max-width: 31ch;
-    margin: clamp(2.5rem, 5vw, 5rem) 0 0;
+    margin: clamp(5rem, 10vw, 10rem) 0 0;
     font-size: clamp(1.25rem, 2.2vw, 2rem);
     line-height: 1.25;
     letter-spacing: -0.025em;

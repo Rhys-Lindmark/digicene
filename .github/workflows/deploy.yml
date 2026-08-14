@@ -1,0 +1,44 @@
+name: Deploy to DigitalOcean
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out the pushed commit
+        uses: actions/checkout@v4
+
+      - name: Configure deployment connection
+        env:
+          DEPLOY_KEY: ${{ secrets.DIGICENE_DEPLOY_KEY }}
+          KNOWN_HOSTS: ${{ secrets.DIGICENE_KNOWN_HOSTS }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/digicene_deploy
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/digicene_deploy ~/.ssh/known_hosts
+
+      - name: Build and deploy the release
+        env:
+          DEPLOY_HOST: ${{ secrets.DIGICENE_DEPLOY_HOST }}
+        run: |
+          set -o pipefail
+          git archive --format=tar "$GITHUB_SHA" |
+            ssh -i ~/.ssh/digicene_deploy \
+              -o BatchMode=yes \
+              -o IdentitiesOnly=yes \
+              -o StrictHostKeyChecking=yes \
+              root@"$DEPLOY_HOST" "deploy $GITHUB_SHA"
