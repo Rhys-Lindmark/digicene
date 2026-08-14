@@ -167,7 +167,7 @@ const evidence = [
       <section class="digicene-signals" aria-labelledby="signals-heading">
         <header class="signals-intro">
           <h2 id="signals-heading">
-            The Digicene start date is not clear. But the curves are
+            The Digicene numbers are smaller, but the curves are
             exponential.
           </h2>
         </header>
@@ -179,18 +179,11 @@ const evidence = [
               <p>Data centers consume 50 GW—about 2% of all electricity.</p>
             </div>
             <figure class="signal-chart">
-              <a
-                href="https://www.reddit.com/r/EconomyCharts/comments/1qee6rd/us_data_centers_will_consume_nearly_10_of_the/#lightbox"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="View data center electricity consumption chart"
-              >
-                <img
-                  src="/data-center-energy.jpg"
-                  alt="Line chart showing data center electricity consumption rising steeply, particularly in the United States."
-                  loading="lazy"
-                />
-              </a>
+              <iframe
+                src="https://ourworldindata.org/grapher/data-centers-share-electricity-demand?embedded=true"
+                title="Share of total electricity demand used by data centers"
+                loading="lazy"
+              />
             </figure>
           </article>
 
@@ -223,37 +216,25 @@ const evidence = [
                 human brainpower.
               </p>
             </div>
-            <a
-              class="compute-chart"
-              href="https://epoch.ai/data/ai-chip-sales?view=graph&tab=h100_equivalents"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Explore Epoch AI data on AI chip sales"
-            >
-              <div class="compute-total compute-total--ai">
-                <span>AI</span>
-                <strong>25M</strong>
-                <small>H100 equivalents</small>
-              </div>
-              <div class="compute-ratio" aria-hidden="true">
-                <span></span>
-              </div>
-              <div class="compute-total compute-total--human">
-                <span>Humanity</span>
-                <strong>8B</strong>
-                <small>human brains</small>
-              </div>
-              <p>Both roughly 1 PFLOP each</p>
-            </a>
+            <figure class="signal-chart">
+              <a
+                href="https://epoch.ai/data/ai-chip-sales?view=graph&tab=h100_equivalents"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Explore Epoch AI data on AI chip sales"
+              >
+                <img
+                  src="/ai-chip-sales.png"
+                  alt="Bar chart showing cumulative AI chip sales in H100 equivalents, growing from about 1M in early 2024 to over 24M by early 2026."
+                  loading="lazy"
+                />
+              </a>
+            </figure>
           </article>
 
           <article class="signal-row">
             <div class="signal-copy">
-              <span class="signal-number">Code</span>
-              <p>
-                The robots are coming. But for now, the Digicene is digital.
-                Claude is 4% of all public GitHub commits.
-              </p>
+              <p>Claude codes 4% of public GitHub commits.</p>
             </div>
             <figure class="signal-chart signal-chart--dark">
               <img
@@ -632,11 +613,22 @@ const evidence = [
   }
 
   .evidence {
+    position: relative;
     padding-bottom: clamp(5rem, 9vw, 9rem);
-    border-top: 1px solid rgba(23, 26, 22, 0.35);
     background: #f3d9b3;
     box-shadow: 0 0 0 100vmax #f3d9b3;
     clip-path: inset(0 -100vmax);
+  }
+
+  .evidence::after {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100vw;
+    height: 1px;
+    content: "";
+    background: rgba(23, 26, 22, 0.35);
+    transform: translateX(-50%);
   }
 
   .evidence-row {
@@ -726,7 +718,18 @@ const evidence = [
   }
 
   .signals-list {
-    border-top: 1px solid rgba(23, 26, 22, 0.24);
+    position: relative;
+  }
+
+  .signals-list::before {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100vw;
+    height: 1px;
+    content: "";
+    background: rgba(23, 26, 22, 0.24);
+    transform: translateX(-50%);
   }
 
   .signal-row {
@@ -778,6 +781,13 @@ const evidence = [
     height: auto;
   }
 
+  .signal-chart iframe {
+    display: block;
+    width: 100%;
+    height: clamp(22rem, 32vw, 32rem);
+    border: 0;
+  }
+
   .signal-chart--dark {
     background: #c9dcee;
   }
@@ -785,97 +795,6 @@ const evidence = [
   .signal-chart--fixed img {
     height: clamp(22rem, 32vw, 32rem);
     object-fit: cover;
-  }
-
-  .compute-chart {
-    --signal-ink: #f1eee5;
-    --signal-muted: rgba(241, 238, 229, 0.58);
-    position: relative;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(4rem, 0.45fr) minmax(0, 1fr);
-    gap: clamp(1rem, 3vw, 2.5rem);
-    width: 100%;
-    min-height: 22rem;
-    padding: clamp(1.5rem, 3vw, 2.75rem);
-    justify-self: end;
-    color: var(--signal-ink);
-    text-decoration: none;
-    background:
-      linear-gradient(rgba(241, 238, 229, 0.075) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(241, 238, 229, 0.075) 1px, transparent 1px),
-      #1a211b;
-    background-size: 2rem 2rem;
-    border: 1px solid rgba(241, 238, 229, 0.3);
-    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.25);
-  }
-
-  .compute-total {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-
-  .compute-total > span,
-  .compute-total small,
-  .compute-chart > p {
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.11em;
-    text-transform: uppercase;
-  }
-
-  .compute-total > span,
-  .compute-total small {
-    color: var(--signal-muted);
-  }
-
-  .compute-total strong {
-    margin-block: 0.45rem;
-    font-size: clamp(2.8rem, 6vw, 5rem);
-    font-weight: 400;
-    line-height: 0.9;
-    letter-spacing: -0.06em;
-  }
-
-  .compute-total--ai strong {
-    color: #91c99b;
-  }
-
-  .compute-ratio {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding-bottom: 1.8rem;
-  }
-
-  .compute-ratio span {
-    position: relative;
-    display: block;
-    width: 1px;
-    height: 82%;
-    background: rgba(241, 238, 229, 0.3);
-  }
-
-  .compute-ratio span::after {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 0.65rem;
-    height: 0.65rem;
-    content: "";
-    background: #91c99b;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .compute-chart > p {
-    position: absolute;
-    top: clamp(1.5rem, 3vw, 2.75rem);
-    right: clamp(1.5rem, 3vw, 2.75rem);
-    left: clamp(1.5rem, 3vw, 2.75rem);
-    margin: 0;
-    color: var(--signal-muted);
-    text-align: right;
   }
 
   @media (max-width: 800px) {
@@ -919,8 +838,7 @@ const evidence = [
       max-width: 22ch;
     }
 
-    .signal-chart,
-    .compute-chart {
+    .signal-chart {
       width: min(100%, 32rem);
       justify-self: start;
     }
@@ -963,17 +881,5 @@ const evidence = [
       padding-inline: 1rem;
     }
 
-    .compute-chart {
-      grid-template-columns: 1fr;
-      min-height: 25rem;
-    }
-
-    .compute-ratio {
-      display: none;
-    }
-
-    .compute-total {
-      justify-content: flex-end;
-    }
   }
 </style>
