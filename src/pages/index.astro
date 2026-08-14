@@ -3,25 +3,21 @@ export const prerender = false;
 
 const evidence = [
   {
-    number: "01",
     statement: "CO2 levels have increased from 275 to 425 ppm.",
     image: "/co2-concentration.png",
     alt: "Line chart showing atmospheric carbon dioxide concentration rising from about 275 ppm to more than 425 ppm.",
   },
   {
-    number: "02",
     statement: "Half of the world’s arable land is now used for agriculture.",
     image: "/land-use-for-food.jpg",
     alt: "Diagram showing how the world’s surface and habitable land are used for food production.",
   },
   {
-    number: "03",
     statement: "Anthropogenic mass is now greater than all biomass.",
     image: "/anthropogenic-mass.png",
     alt: "Area chart showing anthropogenic mass overtaking the dry weight of all biomass around 2020.",
   },
   {
-    number: "04",
     statement:
       "Human energy use has grown from 1 to 20 TW, compared to 100 TW for the biosphere.",
     image: "/global-primary-energy.png",
@@ -135,17 +131,14 @@ const evidence = [
             aria-label="Timeline showing the Pleistocene from 2.58 million years ago to 1850, followed by the Holocene from 1850 to present, and the transition into the Digicene."
           >
             <div class="timeline-era timeline-era--pleistocene">
-              <span class="timeline-index" aria-hidden="true">01</span>
               <strong>Pleistocene</strong>
               <span class="timeline-range">2.58 mya — 1850</span>
             </div>
             <div class="timeline-era timeline-era--holocene">
-              <span class="timeline-index" aria-hidden="true">02</span>
               <strong>Holocene</strong>
               <span class="timeline-range">1850 — Present</span>
             </div>
             <div class="timeline-era timeline-era--digicene">
-              <span class="timeline-index" aria-hidden="true">03</span>
               <strong>Digicene</strong>
             </div>
           </div>
@@ -156,9 +149,6 @@ const evidence = [
             evidence.map((item) => (
               <article class="evidence-row">
                 <div class="evidence-copy">
-                  <span class="evidence-number" aria-hidden="true">
-                    {item.number}
-                  </span>
                   <p>{item.statement}</p>
                 </div>
 
@@ -173,14 +163,10 @@ const evidence = [
 
       <section class="digicene-signals" aria-labelledby="signals-heading">
         <header class="signals-intro">
-          <p class="eyebrow">Signals of the Digicene</p>
           <h2 id="signals-heading">
-            We don’t know exactly when it begins. We can see the curves.
+            The Digicene start date is not clear. But the curves are
+            exponential.
           </h2>
-          <p>
-            Across energy, mass, and computation, the physical footprint of AI
-            is growing exponentially.
-          </p>
         </header>
 
         <div class="signals-list">
@@ -593,18 +579,6 @@ const evidence = [
     padding-bottom: clamp(5rem, 10vw, 10rem);
   }
 
-  .eyebrow,
-  .evidence-number {
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
-  }
-
-  .eyebrow {
-    margin: 0 0 clamp(2rem, 5vw, 4.75rem);
-  }
-
   .epoch h2 {
     max-width: 31ch;
     margin: 0;
@@ -644,16 +618,11 @@ const evidence = [
     border-left: 1px solid rgba(23, 26, 22, 0.45);
   }
 
-  .timeline-index,
   .timeline-range {
     font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-  }
-
-  .timeline-index {
-    color: rgba(23, 26, 22, 0.48);
   }
 
   .timeline-era strong {
@@ -680,17 +649,7 @@ const evidence = [
   }
 
   .timeline-era--digicene {
-    position: relative;
     background: #c9dcee;
-  }
-
-  .timeline-era--digicene::before {
-    position: absolute;
-    inset: 0 auto 0 0;
-    width: clamp(2rem, 6vw, 6rem);
-    content: "";
-    background: linear-gradient(90deg, #f3d9b3, transparent);
-    transform: translateX(-50%);
   }
 
   .evidence {
@@ -699,7 +658,7 @@ const evidence = [
 
   .evidence-row {
     display: grid;
-    grid-template-columns: minmax(15rem, 0.72fr) minmax(0, 1.28fr);
+    grid-template-columns: minmax(15rem, 1fr) minmax(0, 1fr);
     gap: clamp(2rem, 6vw, 7rem);
     align-items: start;
     padding: clamp(3rem, 7vw, 7rem) 0;
@@ -712,12 +671,6 @@ const evidence = [
     min-height: 100%;
   }
 
-  .evidence-number {
-    display: block;
-    margin-bottom: clamp(2rem, 5vw, 5rem);
-    color: rgba(23, 26, 22, 0.55);
-  }
-
   .evidence-copy p {
     margin: 0 0 2.5rem;
     font-size: clamp(1.8rem, 3.2vw, 3.75rem);
@@ -726,11 +679,11 @@ const evidence = [
   }
 
   .chart {
-    width: 50%;
+    width: 100%;
     margin: 0;
     justify-self: end;
     overflow: hidden;
-    background: #fff;
+    background: #f3d9b3;
     border: 1px solid rgba(23, 26, 22, 0.18);
     box-shadow: 0 1.5rem 4rem rgba(23, 26, 22, 0.08);
   }
@@ -775,22 +728,13 @@ const evidence = [
     letter-spacing: -0.055em;
   }
 
-  .signals-intro > p:last-child {
-    max-width: 32ch;
-    margin: clamp(2.5rem, 5vw, 5rem) 0 0 auto;
-    color: var(--signal-muted);
-    font-size: clamp(1.25rem, 2.2vw, 2rem);
-    line-height: 1.25;
-    letter-spacing: -0.025em;
-  }
-
   .signals-list {
     border-top: 1px solid rgba(241, 238, 229, 0.24);
   }
 
   .signal-row {
     display: grid;
-    grid-template-columns: minmax(15rem, 0.72fr) minmax(0, 1.28fr);
+    grid-template-columns: minmax(15rem, 1fr) minmax(0, 1fr);
     gap: clamp(2rem, 6vw, 7rem);
     align-items: start;
     padding: clamp(3rem, 7vw, 7rem) 0;
@@ -820,11 +764,11 @@ const evidence = [
   }
 
   .signal-chart {
-    width: 50%;
+    width: 100%;
     margin: 0;
     justify-self: end;
     overflow: hidden;
-    background: #f5f3eb;
+    background: #c9dcee;
     box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.25);
   }
 
@@ -839,7 +783,7 @@ const evidence = [
   }
 
   .signal-chart--dark {
-    background: #000;
+    background: #c9dcee;
   }
 
   .compute-chart {
@@ -847,7 +791,7 @@ const evidence = [
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(4rem, 0.45fr) minmax(0, 1fr);
     gap: clamp(1rem, 3vw, 2.5rem);
-    width: min(100%, 36rem);
+    width: 100%;
     min-height: 22rem;
     padding: clamp(1.5rem, 3vw, 2.75rem);
     justify-self: end;
@@ -955,10 +899,6 @@ const evidence = [
 
     .evidence-copy {
       min-height: 0;
-    }
-
-    .evidence-number {
-      margin-bottom: 1.5rem;
     }
 
     .evidence-copy p {
