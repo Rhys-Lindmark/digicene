@@ -4,8 +4,8 @@ export const prerender = false;
 const evidence = [
   {
     statement: "CO2 levels have increased from 275 to 425 ppm.",
-    image: "/co2-concentration.png",
-    alt: "Line chart showing atmospheric carbon dioxide concentration rising from about 275 ppm to more than 425 ppm.",
+    embed: "co2-long-term-concentration",
+    title: "Carbon dioxide concentration in the atmosphere",
   },
   {
     statement: "Half of the world’s arable land is now used for agriculture.",
@@ -20,8 +20,8 @@ const evidence = [
   {
     statement:
       "Human energy use has grown from 1 to 20 TW, compared to 100 TW for the biosphere.",
-    image: "/global-primary-energy.png",
-    alt: "Stacked area chart showing global primary energy use by source rising sharply since 1800.",
+    embed: "global-primary-energy",
+    title: "Global direct primary energy consumption",
   },
 ];
 ---
@@ -153,7 +153,15 @@ const evidence = [
                 </div>
 
                 <figure class="chart">
-                  <img src={item.image} alt={item.alt} loading="lazy" />
+                  {item.embed ? (
+                    <iframe
+                      src={`https://ourworldindata.org/grapher/${item.embed}?embedded=true`}
+                      title={item.title}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <img src={item.image} alt={item.alt} loading="lazy" />
+                  )}
                 </figure>
               </article>
             ))
@@ -692,6 +700,13 @@ const evidence = [
     display: block;
     width: 100%;
     height: auto;
+  }
+
+  .chart iframe {
+    display: block;
+    width: 100%;
+    height: clamp(22rem, 32vw, 32rem);
+    border: 0;
   }
 
   .digicene-signals {
