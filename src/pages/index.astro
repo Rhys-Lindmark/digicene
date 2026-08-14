@@ -83,6 +83,40 @@ const evidence = [
         </h1>
       </section>
 
+      <section class="token-ticker" aria-labelledby="token-ticker-heading">
+        <div class="token-ticker-inner" data-token-ticker>
+          <header class="token-ticker-header">
+            <p class="eyebrow">A live signal</p>
+            <h2 id="token-ticker-heading">Tokens processed today</h2>
+            <p class="token-change" data-token-change aria-live="polite">
+              Checking the latest daily total
+            </p>
+          </header>
+
+          <p
+            class="token-total"
+            aria-label="Estimated tokens processed today on OpenRouter"
+          >
+            <span data-token-total>—</span>
+            <small>tokens</small>
+          </p>
+
+          <footer class="token-ticker-footer">
+            <p data-token-note>
+              Estimated live from the latest completed UTC day.
+            </p>
+            <a
+              href="https://openrouter.ai/rankings"
+              target="_blank"
+              rel="noreferrer"
+              data-token-source
+            >
+              Source: OpenRouter ↗
+            </a>
+          </footer>
+        </div>
+      </section>
+
       <section class="epoch" aria-labelledby="epoch-heading">
         <div class="epoch-intro">
           <h2 id="epoch-heading">
@@ -297,6 +331,69 @@ const evidence = [
 
         document.addEventListener("pointerdown", startHero, { once: true });
       }
+
+      type TokenSummary = {
+        asOf: string;
+        dailyChangePercent: number;
+        latestDailyTokens: string;
+        latestDate: string;
+        method: "daily" | "weekly-average";
+        tokensPerSecond: number;
+      };
+
+      const ticker = document.querySelector<HTMLElement>("[data-token-ticker]");
+      const total = ticker?.querySelector<HTMLElement>("[data-token-total]");
+      const change = ticker?.querySelector<HTMLElement>("[data-token-change]");
+      const source = ticker?.querySelector<HTMLElement>("[data-token-source]");
+      const note = ticker?.querySelector<HTMLElement>("[data-token-note]");
+      const tokenFormatter = new Intl.NumberFormat("en-US", {
+        maximumFractionDigits: 0,
+      });
+
+      const updateTokenTicker = async () => {
+        if (!ticker || !total || !change) return;
+
+        try {
+          const response = await fetch("/api/openrouter-tokens");
+          if (!response.ok) throw new Error("Token data unavailable");
+          const summary = (await response.json()) as TokenSummary;
+          const direction = summary.dailyChangePercent >= 0 ? "+" : "";
+          change.textContent = `${direction}${summary.dailyChangePercent.toFixed(1)}% vs. previous day`;
+          if (note && summary.method === "weekly-average") {
+            note.textContent =
+              "Estimated live from the latest completed weekly average.";
+            change.textContent = `${direction}${summary.dailyChangePercent.toFixed(1)}% vs. previous week`;
+          }
+
+          const asOf = new Date(summary.asOf);
+          if (source && !Number.isNaN(asOf.getTime())) {
+            source.textContent = `Source: OpenRouter · as of ${asOf.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })} ↗`;
+          }
+
+          const render = () => {
+            const now = Date.now();
+            const startOfUtcDay = Date.UTC(
+              new Date(now).getUTCFullYear(),
+              new Date(now).getUTCMonth(),
+              new Date(now).getUTCDate(),
+            );
+            const elapsedSeconds = Math.max(0, (now - startOfUtcDay) / 1000);
+            const estimate = Math.min(
+              Number(summary.latestDailyTokens),
+              elapsedSeconds * summary.tokensPerSecond,
+            );
+            total.textContent = tokenFormatter.format(Math.floor(estimate));
+            window.requestAnimationFrame(render);
+          };
+
+          window.requestAnimationFrame(render);
+        } catch {
+          total.textContent = "—";
+          change.textContent = "Live data temporarily unavailable";
+        }
+      };
+
+      void updateTokenTicker();
     </script>
   </body>
 </html>
@@ -366,6 +463,96 @@ const evidence = [
         transparent 15%,
         rgba(4, 6, 4, 0.3) 100%
       );
+  }
+
+  .token-ticker {
+    --ticker-ink: #f3f1e9;
+    padding: clamp(2.5rem, 5vw, 5rem) clamp(1.25rem, 5vw, 5.5rem)
+      clamp(3rem, 6vw, 6rem);
+    color: var(--ticker-ink);
+    background: #111311;
+    border-top: 1px solid rgba(243, 241, 233, 0.18);
+    border-bottom: 1px solid rgba(243, 241, 233, 0.18);
+  }
+
+  .token-ticker-inner {
+    width: min(100%, 90rem);
+    margin-inline: auto;
+  }
+
+  .token-ticker-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.65rem 2rem;
+    align-items: end;
+  }
+
+  .token-ticker-header .eyebrow {
+    grid-column: 1 / -1;
+    margin: 0;
+    color: rgba(243, 241, 233, 0.6);
+  }
+
+  .token-ticker-header h2 {
+    margin: 0;
+    font-size: clamp(1.3rem, 2.2vw, 2.2rem);
+    font-weight: 400;
+    letter-spacing: -0.035em;
+  }
+
+  .token-change {
+    margin: 0 0 0.25rem;
+    color: #91c99b;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .token-total {
+    display: flex;
+    gap: 0.2em;
+    align-items: baseline;
+    margin: clamp(2rem, 5vw, 4.5rem) 0;
+    overflow: hidden;
+    font-size: clamp(3.1rem, 9.5vw, 10rem);
+    font-variant-numeric: tabular-nums;
+    font-weight: 400;
+    line-height: 0.82;
+    letter-spacing: -0.075em;
+    white-space: nowrap;
+  }
+
+  .token-total small {
+    font-size: clamp(0.75rem, 1.4vw, 1.2rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .token-ticker-footer {
+    display: flex;
+    gap: 1rem 2rem;
+    justify-content: space-between;
+    color: rgba(243, 241, 233, 0.52);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  .token-ticker-footer p {
+    margin: 0;
+  }
+
+  .token-ticker-footer a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .token-ticker-footer a:hover,
+  .token-ticker-footer a:focus-visible {
+    color: var(--ticker-ink);
   }
 
   .title {
@@ -745,6 +932,18 @@ const evidence = [
   }
 
   @media (max-width: 800px) {
+    .token-ticker-header {
+      grid-template-columns: 1fr;
+    }
+
+    .token-change {
+      margin-top: 0.25rem;
+    }
+
+    .token-ticker-footer {
+      flex-direction: column;
+    }
+
     .epoch-transition {
       margin-left: 0;
     }
