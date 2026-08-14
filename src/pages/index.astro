@@ -78,15 +78,13 @@ const evidence = [
 
         <div class="hero-shade" aria-hidden="true"></div>
 
-        <h1 class="title" aria-label="The Digicene">
-          <span class="title-the">The</span>
+        <h1 class="title" aria-label="Digicene">
           <span class="title-name">Digicene</span>
         </h1>
       </section>
 
       <section class="epoch" aria-labelledby="epoch-heading">
         <div class="epoch-intro">
-          <p class="eyebrow">A new geological epoch</p>
           <h2 id="epoch-heading">
             The Digicene is the next geological epoch, when computers become the
             main driver of planetary change.
@@ -98,30 +96,27 @@ const evidence = [
 
         <figure class="epoch-chart" aria-labelledby="timeline-heading">
           <figcaption class="epoch-chart-header">
-            <p class="eyebrow">The road of time</p>
             <h3 id="timeline-heading">Three planetary ages</h3>
-            <p>Conceptual timeline · not to scale</p>
           </figcaption>
 
           <div
             class="timeline"
             role="img"
-            aria-label="Timeline showing the Pleistocene followed by the Holocene beginning in 1850, and an uncertain transition into the Digicene."
+            aria-label="Timeline showing the Pleistocene from 2.58 million years ago to 1850, followed by the Holocene from 1850 to present, and the transition into the Digicene."
           >
             <div class="timeline-era timeline-era--pleistocene">
               <span class="timeline-index" aria-hidden="true">01</span>
               <strong>Pleistocene</strong>
-              <span class="timeline-range">Deep past — 1849</span>
+              <span class="timeline-range">2.58 mya — 1850</span>
             </div>
             <div class="timeline-era timeline-era--holocene">
               <span class="timeline-index" aria-hidden="true">02</span>
               <strong>Holocene</strong>
-              <span class="timeline-range">1850 — uncertain</span>
+              <span class="timeline-range">1850 — Present</span>
             </div>
             <div class="timeline-era timeline-era--digicene">
               <span class="timeline-index" aria-hidden="true">03</span>
               <strong>Digicene</strong>
-              <span class="timeline-range">Start date unclear</span>
             </div>
           </div>
 
@@ -394,12 +389,6 @@ const evidence = [
     text-shadow: 0 2px 28px rgba(0, 0, 0, 0.45);
   }
 
-  .title-the {
-    margin-right: 0.42em;
-    font-size: clamp(0.72rem, 1.3vw, 1.35rem);
-    letter-spacing: 0.28em;
-  }
-
   .title-name {
     font-size: clamp(2.6rem, 8vw, 8.6rem);
     font-weight: 600;
@@ -439,17 +428,17 @@ const evidence = [
   }
 
   .epoch h2 {
-    max-width: 18ch;
+    max-width: 31ch;
     margin: 0;
-    font-size: clamp(2.45rem, 5.8vw, 6.2rem);
+    font-size: clamp(1.25rem, 2.2vw, 2rem);
     font-weight: 400;
-    line-height: 0.98;
-    letter-spacing: -0.045em;
+    line-height: 1.25;
+    letter-spacing: -0.025em;
   }
 
   .epoch-transition {
     max-width: 31ch;
-    margin: clamp(2.5rem, 5vw, 5rem) 0 0 auto;
+    margin: clamp(2.5rem, 5vw, 5rem) 0 0;
     font-size: clamp(1.25rem, 2.2vw, 2rem);
     line-height: 1.25;
     letter-spacing: -0.025em;
@@ -460,16 +449,7 @@ const evidence = [
   }
 
   .epoch-chart-header {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 0.75rem 2rem;
-    align-items: end;
     margin-bottom: clamp(2rem, 4vw, 3.75rem);
-  }
-
-  .epoch-chart-header .eyebrow {
-    grid-column: 1 / -1;
-    margin: 0;
   }
 
   .epoch-chart-header h3 {
@@ -478,15 +458,6 @@ const evidence = [
     font-weight: 400;
     line-height: 0.98;
     letter-spacing: -0.045em;
-  }
-
-  .epoch-chart-header > p:last-child {
-    margin: 0 0 0.35rem;
-    color: rgba(23, 26, 22, 0.58);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
   }
 
   .timeline {
@@ -539,14 +510,12 @@ const evidence = [
   }
 
   .timeline-era--holocene {
-    background: #d9d4c8;
+    background: #f3d9b3;
   }
 
   .timeline-era--digicene {
     position: relative;
-    color: var(--paper);
-    background:
-      radial-gradient(circle at 85% 15%, #455d49 0, transparent 48%), #1b251d;
+    background: #c9dcee;
   }
 
   .timeline-era--digicene::before {
@@ -554,13 +523,8 @@ const evidence = [
     inset: 0 auto 0 0;
     width: clamp(2rem, 6vw, 6rem);
     content: "";
-    background: linear-gradient(90deg, #d9d4c8, transparent);
+    background: linear-gradient(90deg, #f3d9b3, transparent);
     transform: translateX(-50%);
-  }
-
-  .timeline-era--digicene .timeline-index,
-  .timeline-era--digicene .timeline-range {
-    color: rgba(238, 236, 228, 0.62);
   }
 
   .timeline-dates {
@@ -873,23 +837,12 @@ const evidence = [
       justify-self: start;
     }
 
-    .epoch-chart-header {
-      grid-template-columns: 1fr;
-    }
-
-    .epoch-chart-header > p:last-child {
-      margin: 0.25rem 0 0;
-    }
   }
 
   @media (max-width: 540px) {
     .title {
       flex-direction: column;
       align-items: flex-start;
-    }
-
-    .title-the {
-      margin: 0 0 0.5rem 0.12em;
     }
 
     .title-name {
