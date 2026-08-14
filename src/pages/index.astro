@@ -84,24 +84,22 @@ const evidence = [
         <div class="token-ticker-inner" data-token-ticker>
           <header class="token-ticker-header">
             <p class="eyebrow">A live signal</p>
-            <h2 id="token-ticker-heading">Tokens processed today</h2>
+            <h2 id="token-ticker-heading">Estimated token throughput</h2>
             <p class="token-change" data-token-change aria-live="polite">
-              Checking the latest daily total
+              Checking the latest throughput
             </p>
           </header>
 
           <p
             class="token-total"
-            aria-label="Estimated tokens processed today on OpenRouter"
+            aria-label="Estimated OpenRouter tokens processed per second"
           >
             <span data-token-total>—</span>
-            <small>tokens</small>
+            <small>tokens / second</small>
           </p>
 
           <footer class="token-ticker-footer">
-            <p data-token-note>
-              Estimated live from the latest completed UTC day.
-            </p>
+            <p data-token-note>Based on the latest completed UTC day.</p>
             <a
               href="https://openrouter.ai/rankings"
               target="_blank"
@@ -355,8 +353,7 @@ const evidence = [
           const direction = summary.dailyChangePercent >= 0 ? "+" : "";
           change.textContent = `${direction}${summary.dailyChangePercent.toFixed(1)}% vs. previous day`;
           if (note && summary.method === "weekly-average") {
-            note.textContent =
-              "Estimated live from the latest completed weekly average.";
+            note.textContent = "Based on the latest completed weekly average.";
             change.textContent = `${direction}${summary.dailyChangePercent.toFixed(1)}% vs. previous week`;
           }
 
@@ -365,19 +362,19 @@ const evidence = [
             source.textContent = `Source: OpenRouter · as of ${asOf.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })} ↗`;
           }
 
-          const render = () => {
-            const now = Date.now();
-            const startOfUtcDay = Date.UTC(
-              new Date(now).getUTCFullYear(),
-              new Date(now).getUTCMonth(),
-              new Date(now).getUTCDate(),
-            );
-            const elapsedSeconds = Math.max(0, (now - startOfUtcDay) / 1000);
-            const estimate = Math.min(
-              Number(summary.latestDailyTokens),
-              elapsedSeconds * summary.tokensPerSecond,
-            );
-            total.textContent = tokenFormatter.format(Math.floor(estimate));
+          const phase = Math.random() * Math.PI * 2;
+          let lastUpdate = 0;
+          const render = (timestamp: number) => {
+            if (timestamp - lastUpdate >= 80) {
+              const seconds = timestamp / 1000;
+              const noise =
+                Math.sin(seconds * 0.8 + phase) * 0.022 +
+                Math.sin(seconds * 2.1 + phase * 0.7) * 0.009 +
+                Math.sin(seconds * 0.19 + phase * 1.4) * 0.016;
+              const estimate = summary.tokensPerSecond * (1 + noise);
+              total.textContent = tokenFormatter.format(Math.round(estimate));
+              lastUpdate = timestamp;
+            }
             window.requestAnimationFrame(render);
           };
 
@@ -945,7 +942,6 @@ const evidence = [
       width: min(100%, 32rem);
       justify-self: start;
     }
-
   }
 
   @media (max-width: 540px) {
