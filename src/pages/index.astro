@@ -514,7 +514,8 @@ const evidence = [
     top: 50%;
     left: 50%;
     display: flex;
-    align-items: baseline;
+    flex-direction: column;
+    align-items: center;
     margin: 0;
     color: #fff;
     font-weight: 400;
@@ -526,11 +527,11 @@ const evidence = [
   }
 
   .title-article {
-    margin-right: 0.45em;
+    margin: 0 0 0.35rem;
     font-size: clamp(0.75rem, 1.3vw, 1.35rem);
     font-weight: 600;
     letter-spacing: 0.16em;
-    text-transform: none;
+    text-transform: uppercase;
   }
 
   .title-name {
@@ -928,8 +929,7 @@ const evidence = [
 
   @media (max-width: 540px) {
     .title {
-      flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
     }
 
     .title-article {
