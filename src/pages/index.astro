@@ -86,7 +86,6 @@ const evidence = [
       <section class="token-ticker" aria-label="OpenRouter token throughput">
         <div class="token-ticker-inner" data-token-ticker>
           <p class="token-label">Live(ish) cognitive throughput:</p>
-          <hr class="token-divider" />
           <p
             class="token-total"
             aria-label="Estimated OpenRouter tokens processed per second"
@@ -101,6 +100,7 @@ const evidence = [
               OpenRouter ↗
             </a>
           </p>
+          <hr class="token-divider" />
         </div>
       </section>
 
@@ -479,7 +479,7 @@ const evidence = [
 
   .token-divider {
     width: min(100%, 40rem);
-    margin: 0.9rem auto;
+    margin: 0.9rem auto 0;
     border: 0;
     border-top: 1px solid rgba(23, 26, 22, 0.35);
   }
@@ -489,7 +489,7 @@ const evidence = [
     gap: 0.45em;
     align-items: baseline;
     justify-content: center;
-    margin: 0;
+    margin: 0.8rem 0 0;
     font-size: clamp(0.82rem, 1.4vw, 1.2rem);
     font-variant-numeric: tabular-nums;
     font-weight: 700;
