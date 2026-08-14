@@ -14,12 +14,14 @@ const evidence = [
     alt: "Diagram showing how the world’s surface and habitable land are used for food production.",
   },
   {
+    label: "Mass",
     statement: "Anthropogenic mass is now greater than all biomass.",
     image: "/anthropogenic-mass.png",
     alt: "Area chart showing anthropogenic mass overtaking the dry weight of all biomass around 2020.",
     padded: true,
   },
   {
+    label: "Energy",
     statement:
       "Human energy use has grown from 1 to 20 TW, compared to 100 TW for the biosphere.",
     embed: "global-primary-energy",
@@ -138,6 +140,9 @@ const evidence = [
             evidence.map((item) => (
               <article class="evidence-row">
                 <div class="evidence-copy">
+                  {item.label && (
+                    <span class="evidence-label">{item.label}</span>
+                  )}
                   <p>{item.statement}</p>
                 </div>
 
@@ -169,7 +174,7 @@ const evidence = [
         <div class="signals-list">
           <article class="signal-row">
             <div class="signal-copy">
-              <span class="signal-number">01 / Energy</span>
+              <span class="signal-number">Energy</span>
               <p>Data centers consume 50 GW—about 2% of all electricity.</p>
             </div>
             <figure class="signal-chart">
@@ -190,19 +195,19 @@ const evidence = [
 
           <article class="signal-row">
             <div class="signal-copy">
-              <span class="signal-number">02 / Mass</span>
+              <span class="signal-number">Mass</span>
               <p>We now build more data centers than offices.</p>
             </div>
-            <figure class="signal-chart signal-chart--dark">
+            <figure class="signal-chart signal-chart--dark signal-chart--fixed">
               <a
-                href="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iBh.U2iTtpyA/v3/piL.vZNnk8fG1FJf0SN7xW9FmdjS0dnCrU/-1x-1.png"
+                href="https://x.com/josephpolitano/status/1951740903925715126"
                 target="_blank"
                 rel="noreferrer"
-                aria-label="View data center construction spending chart"
+                aria-label="View data center vs office construction spending chart"
               >
                 <img
-                  src="/data-center-construction.jpg"
-                  alt="Line chart showing data center construction spending overtaking general office construction spending in December 2025."
+                  src="/data-center-vs-office.png"
+                  alt="Line chart showing US data center construction spending climbing to overtake office construction spending, accelerating after the ChatGPT launch."
                   loading="lazy"
                 />
               </a>
@@ -211,8 +216,11 @@ const evidence = [
 
           <article class="signal-row">
             <div class="signal-copy">
-              <span class="signal-number">03 / Computation</span>
-              <p>AI has reached roughly 0.3% of human brainpower.</p>
+              <span class="signal-number">Computation</span>
+              <p>
+                There are now 25M H100e chips. With 8B humans, AI is 0.3% of
+                human brainpower.
+              </p>
             </div>
             <a
               class="compute-chart"
@@ -236,6 +244,23 @@ const evidence = [
               </div>
               <p>Both roughly 1 PFLOP each</p>
             </a>
+          </article>
+
+          <article class="signal-row">
+            <div class="signal-copy">
+              <span class="signal-number">Code</span>
+              <p>
+                The robots are coming. But for now, the Digicene is digital.
+                Claude is 4% of all public GitHub commits.
+              </p>
+            </div>
+            <figure class="signal-chart signal-chart--dark">
+              <img
+                src="/claude-github-commits.jpg"
+                alt="Line chart showing Claude Code's daily GitHub commits growing from near zero to over 134,000 per day, roughly 4% of all public GitHub commits."
+                loading="lazy"
+              />
+            </figure>
           </article>
         </div>
       </section>
@@ -612,6 +637,15 @@ const evidence = [
     min-height: 100%;
   }
 
+  .evidence-label {
+    margin-bottom: 0.75rem;
+    color: rgba(23, 26, 22, 0.55);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
   .evidence-copy p {
     margin: 0 0 2.5rem;
     font-size: clamp(1.8rem, 3.2vw, 3.75rem);
@@ -637,6 +671,7 @@ const evidence = [
 
   .chart--padded {
     padding: clamp(1.5rem, 3vw, 3rem);
+    background: #fff;
   }
 
   .chart iframe {
@@ -729,6 +764,11 @@ const evidence = [
 
   .signal-chart--dark {
     background: #c9dcee;
+  }
+
+  .signal-chart--fixed img {
+    height: clamp(22rem, 32vw, 32rem);
+    object-fit: cover;
   }
 
   .compute-chart {
