@@ -77,7 +77,8 @@ const evidence = [
 
         <div class="hero-shade" aria-hidden="true"></div>
 
-        <h1 class="title" aria-label="Digicene">
+        <h1 class="title" aria-label="The Digicene">
+          <span class="title-article">The</span>
           <span class="title-name">Digicene</span>
         </h1>
       </section>
@@ -524,6 +525,14 @@ const evidence = [
     transform: translate(-50%, -50%);
   }
 
+  .title-article {
+    margin-right: 0.45em;
+    font-size: clamp(0.75rem, 1.3vw, 1.35rem);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: none;
+  }
+
   .title-name {
     font-size: clamp(2.6rem, 8vw, 8.6rem);
     font-weight: 600;
@@ -921,6 +930,10 @@ const evidence = [
     .title {
       flex-direction: column;
       align-items: flex-start;
+    }
+
+    .title-article {
+      margin: 0 0 0.35rem;
     }
 
     .title-name {
