@@ -96,8 +96,15 @@ const evidence = [
             aria-label="Estimated OpenRouter tokens processed per second"
           >
             <strong>Cognitive throughput:</strong>
-            <span class="token-value" data-token-total>—</span>
-            <span class="token-unit">tok/s</span>
+            <a
+              class="token-link"
+              href="https://openrouter.ai/rankings"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span data-token-total>—</span>
+              <span>tok/s</span>
+            </a>
           </p>
         </div>
       </section>
@@ -250,6 +257,26 @@ const evidence = [
                 <img
                   src="/claude-github-commits.jpg"
                   alt="Line chart showing Claude Code's daily GitHub commits growing from near zero to over 134,000 per day, roughly 4% of all public GitHub commits."
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+
+          <article class="signal-row">
+            <div class="signal-copy">
+              <p>See this video for a deeper dive into the Digicene.</p>
+            </div>
+            <figure class="signal-chart signal-chart--video">
+              <a
+                href="https://www.youtube.com/watch?v=g2BAKx2Rr-E"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Watch a deeper dive into the Digicene on YouTube"
+              >
+                <img
+                  src="/digicene-video.jpg"
+                  alt="YouTube video thumbnail showing a glowing sphere split between orange light and darkness."
                   loading="lazy"
                 />
               </a>
@@ -490,9 +517,13 @@ const evidence = [
     flex-wrap: wrap;
   }
 
-  .token-value,
-  .token-unit {
+  .token-link {
+    display: inline-flex;
+    gap: 0.3em;
     color: rgba(23, 26, 22, 0.58);
+    text-decoration: underline;
+    text-decoration-color: rgba(23, 26, 22, 0.45);
+    text-underline-offset: 0.16em;
   }
 
   .title {
@@ -805,6 +836,28 @@ const evidence = [
   .signal-chart--fixed img {
     height: clamp(22rem, 32vw, 32rem);
     object-fit: cover;
+  }
+
+  .signal-chart--video a {
+    position: relative;
+  }
+
+  .signal-chart--video a::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: grid;
+    width: clamp(3.75rem, 7vw, 6rem);
+    aspect-ratio: 1;
+    place-items: center;
+    padding-left: 0.12em;
+    color: #fff;
+    font-size: clamp(1.35rem, 2.5vw, 2.25rem);
+    line-height: 1;
+    content: "▶";
+    background: rgba(0, 0, 0, 0.72);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
   }
 
   @media (max-width: 800px) {
