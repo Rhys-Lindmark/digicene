@@ -5,24 +5,18 @@ const evidence = [
   {
     number: "01",
     statement: "CO2 levels have increased from 275 to 425 ppm.",
-    source: "Our World in Data",
-    href: "https://ourworldindata.org/grapher/co2-long-term-concentration?time=0..latest",
     image: "/co2-concentration.png",
     alt: "Line chart showing atmospheric carbon dioxide concentration rising from about 275 ppm to more than 425 ppm.",
   },
   {
     number: "02",
     statement: "Half of the world’s arable land is now used for agriculture.",
-    source: "Our World in Data",
-    href: "https://ourworldindata.org/cdn-cgi/imagedelivery/qLq-8BTgXU8yG0N6HnOy8g/6d347dd7-ca5b-4aaa-374e-ce2e16044b00/w=850",
     image: "/land-use-for-food.jpg",
     alt: "Diagram showing how the world’s surface and habitable land are used for food production.",
   },
   {
     number: "03",
     statement: "Anthropogenic mass is now greater than all biomass.",
-    source: "Nature",
-    href: "https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-020-3010-5/MediaObjects/41586_2020_3010_Fig1_HTML.png",
     image: "/anthropogenic-mass.png",
     alt: "Area chart showing anthropogenic mass overtaking the dry weight of all biomass around 2020.",
   },
@@ -30,8 +24,6 @@ const evidence = [
     number: "04",
     statement:
       "Human energy use has grown from 1 to 20 TW, compared to 100 TW for the biosphere.",
-    source: "Our World in Data",
-    href: "https://ourworldindata.org/grapher/global-primary-energy-by-source",
     image: "/global-primary-energy.png",
     alt: "Stacked area chart showing global primary energy use by source rising sharply since 1800.",
   },
@@ -56,15 +48,32 @@ const evidence = [
     <main>
       <section class="hero">
         <video
-          class="hero-video"
+          class="hero-video is-active"
           autoplay
           muted
-          loop
           playsinline
           preload="auto"
           aria-hidden="true"
         >
-          <source src="/digicene-background.mp4" type="video/mp4" />
+          <source src="/robot-clip.mp4" type="video/mp4" />
+        </video>
+        <video
+          class="hero-video"
+          muted
+          playsinline
+          preload="auto"
+          aria-hidden="true"
+        >
+          <source src="/stargate-clip.mp4" type="video/mp4" />
+        </video>
+        <video
+          class="hero-video"
+          muted
+          playsinline
+          preload="auto"
+          aria-hidden="true"
+        >
+          <source src="/coding-zoom.mp4" type="video/mp4" />
         </video>
 
         <div class="hero-shade" aria-hidden="true"></div>
@@ -83,9 +92,44 @@ const evidence = [
             main driver of planetary change.
           </h2>
           <p class="epoch-transition">
-            It follows our current epoch, the Anthropocene, which began in 1850.
+            It follows our current epoch, the Holocene, which began in 1850.
           </p>
         </div>
+
+        <figure class="epoch-chart" aria-labelledby="timeline-heading">
+          <figcaption class="epoch-chart-header">
+            <p class="eyebrow">The road of time</p>
+            <h3 id="timeline-heading">Three planetary ages</h3>
+            <p>Conceptual timeline · not to scale</p>
+          </figcaption>
+
+          <div
+            class="timeline"
+            role="img"
+            aria-label="Timeline showing the Pleistocene followed by the Holocene beginning in 1850, and an uncertain transition into the Digicene."
+          >
+            <div class="timeline-era timeline-era--pleistocene">
+              <span class="timeline-index" aria-hidden="true">01</span>
+              <strong>Pleistocene</strong>
+              <span class="timeline-range">Deep past — 1849</span>
+            </div>
+            <div class="timeline-era timeline-era--holocene">
+              <span class="timeline-index" aria-hidden="true">02</span>
+              <strong>Holocene</strong>
+              <span class="timeline-range">1850 — uncertain</span>
+            </div>
+            <div class="timeline-era timeline-era--digicene">
+              <span class="timeline-index" aria-hidden="true">03</span>
+              <strong>Digicene</strong>
+              <span class="timeline-range">Start date unclear</span>
+            </div>
+          </div>
+
+          <div class="timeline-dates" aria-hidden="true">
+            <span>1850</span>
+            <span>?</span>
+          </div>
+        </figure>
 
         <div class="evidence">
           {
@@ -96,23 +140,178 @@ const evidence = [
                     {item.number}
                   </span>
                   <p>{item.statement}</p>
-                  <a href={item.href} target="_blank" rel="noreferrer">
-                    Source: {item.source}
-                    <span aria-hidden="true"> ↗</span>
-                  </a>
                 </div>
 
                 <figure class="chart">
-                  <a href={item.href} target="_blank" rel="noreferrer">
-                    <img src={item.image} alt={item.alt} loading="lazy" />
-                  </a>
+                  <img src={item.image} alt={item.alt} loading="lazy" />
                 </figure>
               </article>
             ))
           }
         </div>
       </section>
+
+      <section class="digicene-signals" aria-labelledby="signals-heading">
+        <header class="signals-intro">
+          <p class="eyebrow">Signals of the Digicene</p>
+          <h2 id="signals-heading">
+            We don’t know exactly when it begins. We can see the curves.
+          </h2>
+          <p>
+            Across energy, mass, and computation, the physical footprint of AI
+            is growing exponentially.
+          </p>
+        </header>
+
+        <div class="signals-list">
+          <article class="signal-row">
+            <div class="signal-copy">
+              <span class="signal-number">01 / Energy</span>
+              <p>Data centers consume 50 GW—about 2% of all electricity.</p>
+            </div>
+            <figure class="signal-chart">
+              <a
+                href="https://www.reddit.com/r/EconomyCharts/comments/1qee6rd/us_data_centers_will_consume_nearly_10_of_the/#lightbox"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="View data center electricity consumption chart"
+              >
+                <img
+                  src="/data-center-energy.jpg"
+                  alt="Line chart showing data center electricity consumption rising steeply, particularly in the United States."
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+
+          <article class="signal-row">
+            <div class="signal-copy">
+              <span class="signal-number">02 / Mass</span>
+              <p>We now build more data centers than offices.</p>
+            </div>
+            <figure class="signal-chart signal-chart--dark">
+              <a
+                href="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iBh.U2iTtpyA/v3/piL.vZNnk8fG1FJf0SN7xW9FmdjS0dnCrU/-1x-1.png"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="View data center construction spending chart"
+              >
+                <img
+                  src="/data-center-construction.jpg"
+                  alt="Line chart showing data center construction spending overtaking general office construction spending in December 2025."
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+
+          <article class="signal-row">
+            <div class="signal-copy">
+              <span class="signal-number">03 / Computation</span>
+              <p>AI has reached roughly 0.3% of human brainpower.</p>
+            </div>
+            <a
+              class="compute-chart"
+              href="https://epoch.ai/data/ai-chip-sales?view=graph&tab=h100_equivalents"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Explore Epoch AI data on AI chip sales"
+            >
+              <div class="compute-total compute-total--ai">
+                <span>AI</span>
+                <strong>25M</strong>
+                <small>H100 equivalents</small>
+              </div>
+              <div class="compute-ratio" aria-hidden="true">
+                <span></span>
+              </div>
+              <div class="compute-total compute-total--human">
+                <span>Humanity</span>
+                <strong>8B</strong>
+                <small>human brains</small>
+              </div>
+              <p>Both roughly 1 PFLOP each</p>
+            </a>
+          </article>
+        </div>
+      </section>
     </main>
+
+    <script>
+      const heroVideos = Array.from(
+        document.querySelectorAll<HTMLVideoElement>(".hero-video"),
+      );
+      const clipDuration = 6;
+      const transitionDuration = 2;
+
+      const playVideo = async (video: HTMLVideoElement) => {
+        video.muted = true;
+        video.defaultMuted = true;
+        video.playsInline = true;
+
+        try {
+          await video.play();
+          return true;
+        } catch {
+          return false;
+        }
+      };
+
+      const transitionToNext = async (
+        video: HTMLVideoElement,
+        index: number,
+      ) => {
+        if (video.dataset.transitioning === "true") return;
+
+        const nextVideo = heroVideos[(index + 1) % heroVideos.length];
+        if (!nextVideo) return;
+
+        video.dataset.transitioning = "true";
+        nextVideo.currentTime = 0;
+
+        if (!(await playVideo(nextVideo))) {
+          video.dataset.transitioning = "false";
+          video.currentTime = 0;
+          await playVideo(video);
+          return;
+        }
+
+        nextVideo.classList.add("is-active");
+        video.classList.remove("is-active");
+
+        window.setTimeout(() => {
+          video.pause();
+          video.currentTime = 0;
+          video.dataset.transitioning = "false";
+        }, transitionDuration * 1000);
+      };
+
+      heroVideos.forEach((video, index) => {
+        video.addEventListener("timeupdate", () => {
+          if (video.currentTime >= clipDuration) {
+            void transitionToNext(video, index);
+          }
+        });
+
+        video.addEventListener("ended", () => {
+          void transitionToNext(video, index);
+        });
+      });
+
+      const firstVideo = heroVideos[0];
+      if (firstVideo) {
+        const startHero = () => void playVideo(firstVideo);
+
+        if (firstVideo.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+          startHero();
+        } else {
+          firstVideo.addEventListener("loadeddata", startHero, { once: true });
+        }
+
+        document.addEventListener("pointerdown", startHero, { once: true });
+      }
+    </script>
   </body>
 </html>
 
@@ -164,6 +363,12 @@ const evidence = [
     object-fit: cover;
     transform: scale(1.015);
     filter: saturate(0.7) contrast(1.08);
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+  }
+
+  .hero-video.is-active {
+    opacity: 1;
   }
 
   .hero-shade {
@@ -211,6 +416,7 @@ const evidence = [
   }
 
   .epoch-intro,
+  .epoch-chart,
   .evidence {
     width: min(100%, 90rem);
     margin-inline: auto;
@@ -221,8 +427,7 @@ const evidence = [
   }
 
   .eyebrow,
-  .evidence-number,
-  .evidence-copy a {
+  .evidence-number {
     font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.13em;
@@ -248,6 +453,139 @@ const evidence = [
     font-size: clamp(1.25rem, 2.2vw, 2rem);
     line-height: 1.25;
     letter-spacing: -0.025em;
+  }
+
+  .epoch-chart {
+    margin-bottom: clamp(6rem, 12vw, 12rem);
+  }
+
+  .epoch-chart-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.75rem 2rem;
+    align-items: end;
+    margin-bottom: clamp(2rem, 4vw, 3.75rem);
+  }
+
+  .epoch-chart-header .eyebrow {
+    grid-column: 1 / -1;
+    margin: 0;
+  }
+
+  .epoch-chart-header h3 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 4.5rem);
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+
+  .epoch-chart-header > p:last-child {
+    margin: 0 0 0.35rem;
+    color: rgba(23, 26, 22, 0.58);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .timeline {
+    display: grid;
+    grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr) minmax(0, 0.8fr);
+    min-height: clamp(15rem, 25vw, 23rem);
+    border: 1px solid rgba(23, 26, 22, 0.45);
+  }
+
+  .timeline-era {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.25rem, 2.5vw, 2.5rem);
+    overflow: hidden;
+  }
+
+  .timeline-era + .timeline-era {
+    border-left: 1px solid rgba(23, 26, 22, 0.45);
+  }
+
+  .timeline-index,
+  .timeline-range {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .timeline-index {
+    color: rgba(23, 26, 22, 0.48);
+  }
+
+  .timeline-era strong {
+    margin-top: auto;
+    font-size: clamp(1.45rem, 3vw, 3.3rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .timeline-range {
+    margin-top: 0.9rem;
+    color: rgba(23, 26, 22, 0.58);
+  }
+
+  .timeline-era--pleistocene {
+    background:
+      linear-gradient(135deg, rgba(23, 26, 22, 0.08), transparent 58%),
+      rgba(23, 26, 22, 0.025);
+  }
+
+  .timeline-era--holocene {
+    background: #d9d4c8;
+  }
+
+  .timeline-era--digicene {
+    position: relative;
+    color: var(--paper);
+    background:
+      radial-gradient(circle at 85% 15%, #455d49 0, transparent 48%), #1b251d;
+  }
+
+  .timeline-era--digicene::before {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: clamp(2rem, 6vw, 6rem);
+    content: "";
+    background: linear-gradient(90deg, #d9d4c8, transparent);
+    transform: translateX(-50%);
+  }
+
+  .timeline-era--digicene .timeline-index,
+  .timeline-era--digicene .timeline-range {
+    color: rgba(238, 236, 228, 0.62);
+  }
+
+  .timeline-dates {
+    display: grid;
+    grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr) minmax(0, 0.8fr);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+
+  .timeline-dates span {
+    position: relative;
+    width: max-content;
+    padding-top: 0.9rem;
+    justify-self: start;
+    transform: translateX(-50%);
+  }
+
+  .timeline-dates span:first-child {
+    grid-column: 2;
+  }
+
+  .timeline-dates span:last-child {
+    grid-column: 3;
+    font-size: 1rem;
   }
 
   .evidence {
@@ -282,36 +620,210 @@ const evidence = [
     letter-spacing: -0.04em;
   }
 
-  .evidence-copy a {
-    width: fit-content;
-    margin-top: auto;
-    padding-bottom: 0.2rem;
-    color: inherit;
-    text-decoration: none;
-    border-bottom: 1px solid currentColor;
-  }
-
-  .evidence-copy a:hover,
-  .evidence-copy a:focus-visible {
-    opacity: 0.55;
-  }
-
   .chart {
+    width: 50%;
     margin: 0;
+    justify-self: end;
     overflow: hidden;
     background: #fff;
     border: 1px solid rgba(23, 26, 22, 0.18);
     box-shadow: 0 1.5rem 4rem rgba(23, 26, 22, 0.08);
   }
 
-  .chart a {
-    display: block;
-  }
-
   .chart img {
     display: block;
     width: 100%;
     height: auto;
+  }
+
+  .digicene-signals {
+    --signal-ink: #f1eee5;
+    --signal-muted: rgba(241, 238, 229, 0.58);
+    padding: clamp(6rem, 12vw, 12rem) clamp(1.25rem, 5vw, 5.5rem)
+      clamp(5rem, 9vw, 9rem);
+    color: var(--signal-ink);
+    background:
+      radial-gradient(
+        circle at 92% 4%,
+        rgba(93, 132, 99, 0.28),
+        transparent 28rem
+      ),
+      #121713;
+  }
+
+  .signals-intro,
+  .signals-list {
+    width: min(100%, 90rem);
+    margin-inline: auto;
+  }
+
+  .signals-intro {
+    padding-bottom: clamp(5rem, 10vw, 10rem);
+  }
+
+  .signals-intro h2 {
+    max-width: 16ch;
+    margin: 0;
+    font-size: clamp(2.7rem, 6.2vw, 6.8rem);
+    font-weight: 400;
+    line-height: 0.94;
+    letter-spacing: -0.055em;
+  }
+
+  .signals-intro > p:last-child {
+    max-width: 32ch;
+    margin: clamp(2.5rem, 5vw, 5rem) 0 0 auto;
+    color: var(--signal-muted);
+    font-size: clamp(1.25rem, 2.2vw, 2rem);
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+  }
+
+  .signals-list {
+    border-top: 1px solid rgba(241, 238, 229, 0.24);
+  }
+
+  .signal-row {
+    display: grid;
+    grid-template-columns: minmax(15rem, 0.72fr) minmax(0, 1.28fr);
+    gap: clamp(2rem, 6vw, 7rem);
+    align-items: start;
+    padding: clamp(3rem, 7vw, 7rem) 0;
+    border-bottom: 1px solid rgba(241, 238, 229, 0.24);
+  }
+
+  .signal-copy {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+
+  .signal-number {
+    margin-bottom: clamp(2rem, 5vw, 5rem);
+    color: var(--signal-muted);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .signal-copy p {
+    margin: 0;
+    font-size: clamp(1.8rem, 3.2vw, 3.75rem);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+  }
+
+  .signal-chart {
+    width: 50%;
+    margin: 0;
+    justify-self: end;
+    overflow: hidden;
+    background: #f5f3eb;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.25);
+  }
+
+  .signal-chart a,
+  .signal-chart img {
+    display: block;
+  }
+
+  .signal-chart img {
+    width: 100%;
+    height: auto;
+  }
+
+  .signal-chart--dark {
+    background: #000;
+  }
+
+  .compute-chart {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(4rem, 0.45fr) minmax(0, 1fr);
+    gap: clamp(1rem, 3vw, 2.5rem);
+    width: min(100%, 36rem);
+    min-height: 22rem;
+    padding: clamp(1.5rem, 3vw, 2.75rem);
+    justify-self: end;
+    color: inherit;
+    text-decoration: none;
+    background:
+      linear-gradient(rgba(241, 238, 229, 0.075) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(241, 238, 229, 0.075) 1px, transparent 1px),
+      #1a211b;
+    background-size: 2rem 2rem;
+    border: 1px solid rgba(241, 238, 229, 0.3);
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.25);
+  }
+
+  .compute-total {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .compute-total > span,
+  .compute-total small,
+  .compute-chart > p {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+
+  .compute-total > span,
+  .compute-total small {
+    color: var(--signal-muted);
+  }
+
+  .compute-total strong {
+    margin-block: 0.45rem;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: -0.06em;
+  }
+
+  .compute-total--ai strong {
+    color: #91c99b;
+  }
+
+  .compute-ratio {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 1.8rem;
+  }
+
+  .compute-ratio span {
+    position: relative;
+    display: block;
+    width: 1px;
+    height: 82%;
+    background: rgba(241, 238, 229, 0.3);
+  }
+
+  .compute-ratio span::after {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0.65rem;
+    height: 0.65rem;
+    content: "";
+    background: #91c99b;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .compute-chart > p {
+    position: absolute;
+    top: clamp(1.5rem, 3vw, 2.75rem);
+    right: clamp(1.5rem, 3vw, 2.75rem);
+    left: clamp(1.5rem, 3vw, 2.75rem);
+    margin: 0;
+    color: var(--signal-muted);
+    text-align: right;
   }
 
   @media (max-width: 800px) {
@@ -336,6 +848,38 @@ const evidence = [
       max-width: 22ch;
       margin-bottom: 1.75rem;
     }
+
+    .chart {
+      width: min(100%, 32rem);
+      justify-self: start;
+    }
+
+    .signal-row {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .signal-number {
+      margin-bottom: 1.5rem;
+    }
+
+    .signal-copy p {
+      max-width: 22ch;
+    }
+
+    .signal-chart,
+    .compute-chart {
+      width: min(100%, 32rem);
+      justify-self: start;
+    }
+
+    .epoch-chart-header {
+      grid-template-columns: 1fr;
+    }
+
+    .epoch-chart-header > p:last-child {
+      margin: 0.25rem 0 0;
+    }
   }
 
   @media (max-width: 540px) {
@@ -356,17 +900,40 @@ const evidence = [
     .epoch {
       padding-inline: 1rem;
     }
-  }
 
-  @media (prefers-reduced-motion: reduce) {
-    .hero-video {
+    .timeline {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+
+    .timeline-era {
+      min-height: 10rem;
+    }
+
+    .timeline-era + .timeline-era {
+      border-top: 1px solid rgba(23, 26, 22, 0.45);
+      border-left: 0;
+    }
+
+    .timeline-dates {
       display: none;
     }
 
-    .hero {
-      background:
-        radial-gradient(circle at 70% 25%, #5b705b, transparent 38%),
-        linear-gradient(145deg, #101610, #263126 60%, #0c0f0c);
+    .digicene-signals {
+      padding-inline: 1rem;
+    }
+
+    .compute-chart {
+      grid-template-columns: 1fr;
+      min-height: 25rem;
+    }
+
+    .compute-ratio {
+      display: none;
+    }
+
+    .compute-total {
+      justify-content: flex-end;
     }
   }
 </style>
