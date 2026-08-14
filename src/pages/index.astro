@@ -17,6 +17,7 @@ const evidence = [
     statement: "Anthropogenic mass is now greater than all biomass.",
     image: "/anthropogenic-mass.png",
     alt: "Area chart showing anthropogenic mass overtaking the dry weight of all biomass around 2020.",
+    padded: true,
   },
   {
     statement:
@@ -143,7 +144,7 @@ const evidence = [
                   <p>{item.statement}</p>
                 </div>
 
-                <figure class="chart">
+                <figure class={`chart ${item.padded ? "chart--padded" : ""}`}>
                   {item.embed ? (
                     <iframe
                       src={`https://ourworldindata.org/grapher/${item.embed}?embedded=true${item.embedParams ? `&${item.embedParams}` : ""}`}
@@ -603,6 +604,7 @@ const evidence = [
 
   .evidence {
     border-top: 1px solid rgba(23, 26, 22, 0.35);
+    background: #f3d9b3;
     box-shadow: 0 0 0 100vmax #f3d9b3;
     clip-path: inset(0 -100vmax);
   }
@@ -642,6 +644,10 @@ const evidence = [
     display: block;
     width: 100%;
     height: auto;
+  }
+
+  .chart--padded {
+    padding: clamp(1.5rem, 3vw, 3rem);
   }
 
   .chart iframe {
