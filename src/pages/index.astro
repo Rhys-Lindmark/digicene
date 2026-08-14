@@ -94,11 +94,7 @@ const evidence = [
           </p>
         </div>
 
-        <figure class="epoch-chart" aria-labelledby="timeline-heading">
-          <figcaption class="epoch-chart-header">
-            <h3 id="timeline-heading">Three planetary ages</h3>
-          </figcaption>
-
+        <figure class="epoch-chart">
           <div
             class="timeline"
             role="img"
@@ -118,11 +114,6 @@ const evidence = [
               <span class="timeline-index" aria-hidden="true">03</span>
               <strong>Digicene</strong>
             </div>
-          </div>
-
-          <div class="timeline-dates" aria-hidden="true">
-            <span>1850</span>
-            <span>?</span>
           </div>
         </figure>
 
@@ -448,18 +439,6 @@ const evidence = [
     margin-bottom: clamp(6rem, 12vw, 12rem);
   }
 
-  .epoch-chart-header {
-    margin-bottom: clamp(2rem, 4vw, 3.75rem);
-  }
-
-  .epoch-chart-header h3 {
-    margin: 0;
-    font-size: clamp(2rem, 4vw, 4.5rem);
-    font-weight: 400;
-    line-height: 0.98;
-    letter-spacing: -0.045em;
-  }
-
   .timeline {
     display: grid;
     grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr) minmax(0, 0.8fr);
@@ -525,31 +504,6 @@ const evidence = [
     content: "";
     background: linear-gradient(90deg, #f3d9b3, transparent);
     transform: translateX(-50%);
-  }
-
-  .timeline-dates {
-    display: grid;
-    grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr) minmax(0, 0.8fr);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-  }
-
-  .timeline-dates span {
-    position: relative;
-    width: max-content;
-    padding-top: 0.9rem;
-    justify-self: start;
-    transform: translateX(-50%);
-  }
-
-  .timeline-dates span:first-child {
-    grid-column: 2;
-  }
-
-  .timeline-dates span:last-child {
-    grid-column: 3;
-    font-size: 1rem;
   }
 
   .evidence {
@@ -866,10 +820,6 @@ const evidence = [
     .timeline-era + .timeline-era {
       border-top: 1px solid rgba(23, 26, 22, 0.45);
       border-left: 0;
-    }
-
-    .timeline-dates {
-      display: none;
     }
 
     .digicene-signals {
