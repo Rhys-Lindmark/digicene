@@ -178,13 +178,30 @@ const evidence = [
       </section>
 
       <section class="digicene-signals" aria-labelledby="signals-heading">
-        <header class="signals-intro">
-          <h2 id="signals-heading">
-            The Digicene is just beginning, but the curves are exponential.
-          </h2>
-        </header>
-
         <div class="signals-list">
+          <article class="signal-row">
+            <div class="signal-copy">
+              <h2 id="signals-heading" class="signal-intro">
+                The Digicene is just beginning, but the curves are exponential.
+              </h2>
+              <p>Claude codes 4% of public GitHub commits.</p>
+            </div>
+            <figure class="signal-chart signal-chart--dark">
+              <a
+                href="https://newsletter.semianalysis.com/p/claude-code-is-the-inflection-point"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Read SemiAnalysis on Claude Code reaching 4% of public GitHub commits"
+              >
+                <img
+                  src="/claude-github-commits.jpg"
+                  alt="Line chart showing Claude Code's daily GitHub commits growing from near zero to over 134,000 per day, roughly 4% of all public GitHub commits."
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+
           <article class="signal-row">
             <div class="signal-copy">
               <span class="signal-number">Energy</span>
@@ -235,26 +252,6 @@ const evidence = [
                 <img
                   src="/ai-chip-sales.png"
                   alt="Bar chart showing cumulative AI chip sales in H100 equivalents, growing from about 1M in early 2024 to over 24M by early 2026."
-                  loading="lazy"
-                />
-              </a>
-            </figure>
-          </article>
-
-          <article class="signal-row">
-            <div class="signal-copy">
-              <p>Claude codes 4% of public GitHub commits.</p>
-            </div>
-            <figure class="signal-chart signal-chart--dark">
-              <a
-                href="https://newsletter.semianalysis.com/p/claude-code-is-the-inflection-point"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Read SemiAnalysis on Claude Code reaching 4% of public GitHub commits"
-              >
-                <img
-                  src="/claude-github-commits.jpg"
-                  alt="Line chart showing Claude Code's daily GitHub commits growing from near zero to over 134,000 per day, roughly 4% of all public GitHub commits."
                   loading="lazy"
                 />
               </a>
@@ -730,23 +727,18 @@ const evidence = [
     border-top: 1px solid rgba(23, 26, 22, 0.24);
   }
 
-  .signals-intro,
   .signals-list {
     width: min(100%, 90rem);
     margin-inline: auto;
   }
 
-  .signals-intro {
-    padding-bottom: clamp(5rem, 10vw, 10rem);
-  }
-
-  .signals-intro h2 {
-    max-width: 16ch;
-    margin: 0;
-    font-size: clamp(2rem, 4.2vw, 4.6rem);
+  .signal-intro {
+    margin: 0 0 0.75rem;
+    color: var(--signal-muted);
+    font-size: 0.72rem;
     font-weight: 400;
-    line-height: 0.94;
-    letter-spacing: -0.055em;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
   }
 
   .signal-row {
