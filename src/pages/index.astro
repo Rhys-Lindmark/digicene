@@ -3,9 +3,10 @@ export const prerender = false;
 
 const evidence = [
   {
+    label: "In the Anthropocene...",
     statement: "CO2 levels have increased from 275 to 425 ppm.",
     embed: "co2-long-term-concentration",
-    embedParams: "time=0..2025",
+    embedParams: "time=1850..2025",
     title: "Carbon dioxide concentration in the atmosphere",
   },
   {
@@ -139,7 +140,6 @@ const evidence = [
         </figure>
 
         <div class="evidence">
-          <p class="evidence-intro">In the Anthropocene...</p>
           {
             evidence.map((item) => (
               <article class="evidence-row">
@@ -656,14 +656,6 @@ const evidence = [
     content: "";
     background: rgba(23, 26, 22, 0.35);
     transform: translateX(-50%);
-  }
-
-  .evidence-intro {
-    margin: 0;
-    padding-top: clamp(1.25rem, 2.5vw, 2.5rem);
-    color: rgba(23, 26, 22, 0.6);
-    font-size: 0.75rem;
-    letter-spacing: 0.04em;
   }
 
   .evidence-row {
