@@ -121,14 +121,14 @@ const evidence = [
           <div
             class="timeline"
             role="img"
-            aria-label="Timeline showing the Pleistocene from 2.58 million years ago to 1850, followed by the Holocene from 1850 to present, and the transition into the Digicene."
+            aria-label="Timeline showing the Holocene from 11,700 years ago to 1850, followed by the Anthropocene from 1850 to present, and the transition into the Digicene."
           >
-            <div class="timeline-era timeline-era--pleistocene">
-              <strong>Pleistocene</strong>
-              <span class="timeline-range">2.58 mya — 1850</span>
-            </div>
             <div class="timeline-era timeline-era--holocene">
               <strong>Holocene</strong>
+              <span class="timeline-range">11,700 years ago — 1850</span>
+            </div>
+            <div class="timeline-era timeline-era--anthropocene">
+              <strong>Anthropocene</strong>
               <span class="timeline-range">1850 — Present</span>
             </div>
             <div class="timeline-era timeline-era--digicene">
@@ -136,12 +136,10 @@ const evidence = [
               <span class="timeline-range">Future</span>
             </div>
           </div>
-          <p class="epoch-transition">
-            It follows our current epoch, the Holocene, which began in 1850.
-          </p>
         </figure>
 
         <div class="evidence">
+          <p class="evidence-intro">In the Anthropocene...</p>
           {
             evidence.map((item) => (
               <article class="evidence-row">
@@ -182,7 +180,7 @@ const evidence = [
       <section class="digicene-signals" aria-labelledby="signals-heading">
         <header class="signals-intro">
           <h2 id="signals-heading">
-            The Digicene numbers are smaller, but the curves are exponential.
+            The Digicene is just beginning, but the curves are exponential.
           </h2>
         </header>
 
@@ -585,14 +583,6 @@ const evidence = [
     letter-spacing: -0.025em;
   }
 
-  .epoch-transition {
-    max-width: 31ch;
-    margin: clamp(5rem, 10vw, 10rem) 0 0;
-    font-size: clamp(1.25rem, 2.2vw, 2rem);
-    line-height: 1.25;
-    letter-spacing: -0.025em;
-  }
-
   .epoch-chart {
     margin-bottom: clamp(6rem, 12vw, 12rem);
   }
@@ -635,13 +625,13 @@ const evidence = [
     color: rgba(23, 26, 22, 0.58);
   }
 
-  .timeline-era--pleistocene {
+  .timeline-era--holocene {
     background:
       linear-gradient(135deg, rgba(23, 26, 22, 0.08), transparent 58%),
       rgba(23, 26, 22, 0.025);
   }
 
-  .timeline-era--holocene {
+  .timeline-era--anthropocene {
     background: #f3d9b3;
   }
 
@@ -666,6 +656,14 @@ const evidence = [
     content: "";
     background: rgba(23, 26, 22, 0.35);
     transform: translateX(-50%);
+  }
+
+  .evidence-intro {
+    margin: 0;
+    padding-top: clamp(1.25rem, 2.5vw, 2.5rem);
+    color: rgba(23, 26, 22, 0.6);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
   }
 
   .evidence-row {
@@ -737,6 +735,7 @@ const evidence = [
       clamp(5rem, 9vw, 9rem);
     color: var(--signal-ink);
     background: #c9dcee;
+    border-top: 1px solid rgba(23, 26, 22, 0.24);
   }
 
   .signals-intro,
@@ -752,25 +751,10 @@ const evidence = [
   .signals-intro h2 {
     max-width: 16ch;
     margin: 0;
-    font-size: clamp(2.7rem, 6.2vw, 6.8rem);
+    font-size: clamp(2rem, 4.2vw, 4.6rem);
     font-weight: 400;
     line-height: 0.94;
     letter-spacing: -0.055em;
-  }
-
-  .signals-list {
-    position: relative;
-  }
-
-  .signals-list::before {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 100vw;
-    height: 1px;
-    content: "";
-    background: rgba(23, 26, 22, 0.24);
-    transform: translateX(-50%);
   }
 
   .signal-row {
@@ -863,10 +847,6 @@ const evidence = [
   @media (max-width: 800px) {
     .token-ticker-footer {
       flex-direction: column;
-    }
-
-    .epoch-transition {
-      margin-left: 0;
     }
 
     .evidence-row {
