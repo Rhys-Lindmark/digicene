@@ -8,6 +8,7 @@ const evidence = [
     embed: "co2-long-term-concentration",
     embedParams: "time=1850..2025",
     title: "Carbon dioxide concentration in the atmosphere",
+    image: "/co2-concentration.png",
   },
   {
     statement: "Half of the world’s arable land is now used for agriculture.",
@@ -32,6 +33,7 @@ const evidence = [
     statement: "Humans use 20 TW of energy. Life uses 100 TW.",
     embed: "global-primary-energy",
     title: "Global direct primary energy consumption",
+    image: "/global-primary-energy.png",
   },
 ];
 ---
@@ -152,12 +154,23 @@ const evidence = [
 
                 <figure class={`chart ${item.padded ? "chart--padded" : ""}`}>
                   {item.embed ? (
-                    <iframe
-                      class="owid-embed"
-                      data-src={`https://ourworldindata.org/grapher/${item.embed}?embedded=true${item.embedParams ? `&${item.embedParams}` : ""}`}
-                      title={item.title}
-                      loading="lazy"
-                    />
+                    <>
+                      <a
+                        class="chart-mobile"
+                        href={`https://ourworldindata.org/grapher/${item.embed}${item.embedParams ? `?${item.embedParams}` : ""}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`Explore Our World in Data's chart: ${item.title}`}
+                      >
+                        <img src={item.image} alt={item.title} loading="lazy" />
+                      </a>
+                      <iframe
+                        class="owid-embed"
+                        data-src={`https://ourworldindata.org/grapher/${item.embed}?embedded=true${item.embedParams ? `&${item.embedParams}` : ""}`}
+                        title={item.title}
+                        loading="lazy"
+                      />
+                    </>
                   ) : item.href ? (
                     <a
                       href={item.href}
@@ -208,6 +221,19 @@ const evidence = [
               <p>Data centers consume 50 GW, about 2% of all electricity.</p>
             </div>
             <figure class="signal-chart">
+              <a
+                class="chart-mobile"
+                href="https://ourworldindata.org/grapher/data-centers-share-electricity-demand"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Explore Our World in Data's chart: Share of total electricity demand used by data centers"
+              >
+                <img
+                  src="/data-center-energy.jpg"
+                  alt="Share of total electricity demand used by data centers"
+                  loading="lazy"
+                />
+              </a>
               <iframe
                 class="owid-embed"
                 data-src="https://ourworldindata.org/grapher/data-centers-share-electricity-demand?embedded=true"
@@ -705,6 +731,10 @@ const evidence = [
     height: auto;
   }
 
+  .chart-mobile {
+    display: none;
+  }
+
   .chart--padded {
     padding: clamp(1.5rem, 3vw, 3rem);
     background: #fff;
@@ -781,6 +811,10 @@ const evidence = [
     height: auto;
   }
 
+  .signal-chart .chart-mobile {
+    display: none;
+  }
+
   .signal-chart iframe {
     display: block;
     width: 100%;
@@ -843,6 +877,14 @@ const evidence = [
       justify-self: start;
     }
 
+    .chart-mobile {
+      display: block;
+    }
+
+    .chart iframe.owid-embed {
+      display: none;
+    }
+
     .signal-row {
       grid-template-columns: 1fr;
       gap: 2.5rem;
@@ -855,6 +897,14 @@ const evidence = [
     .signal-chart {
       width: min(100%, 32rem);
       justify-self: start;
+    }
+
+    .signal-chart .chart-mobile {
+      display: block;
+    }
+
+    .signal-chart iframe.owid-embed {
+      display: none;
     }
 
     .signal-chart--fixed img {
