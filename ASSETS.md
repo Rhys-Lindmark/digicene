@@ -12,7 +12,7 @@ Source links for visual assets included in this repository.
 | [`digicene-video.jpg`](./public/digicene-video.jpg) | [Digicene video](https://www.youtube.com/watch?v=g2BAKx2Rr-E) |
 | [`co2-concentration.png`](./public/co2-concentration.png) | [Our World in Data](https://ourworldindata.org/grapher/co2-long-term-concentration) |
 | [`global-primary-energy.png`](./public/global-primary-energy.png) | [Our World in Data](https://ourworldindata.org/grapher/global-primary-energy-by-source) |
-| [`data-center-electricity.jpg`](./public/data-center-electricity.jpg) | [Our World in Data](https://ourworldindata.org/grapher/data-centers-share-electricity-demand) |
+| [`data-center-energy.jpg`](./public/data-center-energy.jpg) | [EconomyCharts on Reddit](https://www.reddit.com/r/EconomyCharts/comments/1qee6rd/us_data_centers_will_consume_nearly_10_of_the/) |
 | [`data-center-construction.jpg`](./public/data-center-construction.jpg) | [Bloomberg image](https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iBh.U2iTtpyA/v3/piL.vZNnk8fG1FJf0SN7xW9FmdjS0dnCrU/-1x-1.png) |
 | [`robot-clip.mp4`](./public/robot-clip.mp4) | Project asset; no external source link recorded |
 | [`stargate-clip.mp4`](./public/stargate-clip.mp4) | Project asset; no external source link recorded |
