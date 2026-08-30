@@ -10,7 +10,7 @@ const FORBIDDEN = [
 
 export function sanitizeText(value: string, maxCharacters: number) {
   return value
-    .replace(/<[^>]*>/g, "")
+    .replace(/[<>]/g, "")
     .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, "")
     .replace(/\s+/g, " ")
     .trim()
