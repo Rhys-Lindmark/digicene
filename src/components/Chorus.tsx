@@ -42,9 +42,11 @@ function sessionId() {
       id = globalThis.crypto.randomUUID();
     } catch {
       // randomUUID requires HTTPS (or localhost). This ID is only for grouping
-      // anonymous section signals, so an opaque non-cryptographic fallback is
-      // sufficient for the temporary HTTP-by-IP deployment check.
-      id = `preview-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+      // anonymous section signals. getRandomValues remains available in older
+      // or non-secure browser contexts where randomUUID may be unavailable.
+      const words = new Uint32Array(4);
+      globalThis.crypto.getRandomValues(words);
+      id = `preview-${Date.now()}-${Array.from(words, (word) => word.toString(36)).join("")}`;
     }
     try {
       sessionStorage.setItem(key, id);
